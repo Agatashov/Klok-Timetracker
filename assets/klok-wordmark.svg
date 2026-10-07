@@ -1,0 +1,28 @@
+<!--
+  Klok — Horizontal Wordmark
+  For use in About panel, marketing, README header — not the app icon itself.
+  Colors from Theme.swift. Uses system sans-serif; swap for a specific font if needed.
+-->
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 72"
+     role="img" aria-label="Klok">
+  <title>Klok</title>
+
+  <!-- Small clock mark: 48×48, center at (24,36) -->
+  <!-- Rim -->
+  <circle cx="24" cy="36" r="20" fill="none" stroke="#33E28A" stroke-opacity="0.3" stroke-width="1.5"/>
+  <!-- Minute hand: straight up -->
+  <line x1="24" y1="36" x2="24" y2="14" stroke="#33E28A" stroke-width="4" stroke-linecap="round"/>
+  <!-- Hour hand: 4 o'clock (120°) — dx=sin120°×15=13, dy=cos120°*(-1)*(-15)=7.5 -->
+  <line x1="24" y1="36" x2="37" y2="43.5"
+        stroke="#33E28A" stroke-width="4" stroke-linecap="round" opacity="0.78"/>
+  <!-- Center dot -->
+  <circle cx="24" cy="36" r="4.5" fill="#33E28A"/>
+
+  <!-- Wordmark: "KLOK" bold, tracked all-caps -->
+  <text x="56" y="49"
+        font-family="'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif"
+        font-size="36"
+        font-weight="700"
+        letter-spacing="0.1em"
+        fill="#EBF0F5">KLOK</text>
+</svg>
