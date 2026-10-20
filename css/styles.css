@@ -1292,7 +1292,7 @@ button:focus-visible,
 }
 
 .bento-card--core {
-  background: var(--color-surface-raised);
+  background: var(--color-surface);
   border-color: var(--color-border-strong);
   padding: var(--spacing-28);
   gap: 18px;
