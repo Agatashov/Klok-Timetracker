@@ -23,7 +23,18 @@
   <title>Klok — Track your time. Bill your clients. No cloud required.</title>
   <meta name="description" content="Klok is a native Mac app for freelancers and consultants who want simple, local time tracking — with statements you can share and get paid from, using a Google Sheet you already have." />
 
-  <link rel="icon" type="image/svg+xml" href="assets/klok-icon.svg" />
+  <meta property="og:type" content="website" />
+  <meta property="og:title" content="Klok — Track your time. Bill your clients. No cloud required." />
+  <meta property="og:description" content="Klok is a native Mac app for freelancers and consultants who want simple, local time tracking — with statements you can share and get paid from, using a Google Sheet you already have." />
+  <meta property="og:image" content="assets/klok-brand/web/og-image-1200x630.png" />
+  <meta name="twitter:card" content="summary_large_image" />
+
+  <!-- Icon set: assets/klok-brand/web/ (see assets/klok-brand/web/head-snippet.html) -->
+  <link rel="icon" href="assets/klok-brand/web/favicon.ico" sizes="48x48" />
+  <link rel="icon" href="assets/klok-brand/web/favicon.svg" type="image/svg+xml" />
+  <link rel="apple-touch-icon" href="assets/klok-brand/web/apple-touch-icon.png" />
+  <link rel="manifest" href="assets/klok-brand/web/site.webmanifest" />
+  <meta name="theme-color" content="#121212" />
 
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -39,14 +50,13 @@
   <nav class="nav" id="site-nav" aria-label="Main">
     <div class="container nav-inner">
       <a href="#" class="nav-logo" aria-label="Klok home">
-        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="12" r="9"></circle><path d="M12 7v5l3 2"></path></svg>
-        <span>KLOK</span>
+        <img class="wordmark" src="assets/klok-brand/wordmark/klok-wordmark-compact.svg" width="69" height="24" alt="" />
       </a>
       <div class="nav-links">
         <a href="#how" class="btn-ghost">How it works</a>
         <a href="#features" class="btn-ghost">Features</a>
         <a href="#setup" class="btn-ghost">Setup</a>
-        <a href="#requirements" class="btn-ghost">Requirements</a>
+        <a href="donate.html" class="btn-ghost">Support</a>
       </div>
       <a href="downloads/Klok.dmg" download class="btn-primary btn-primary--sm">Download for Mac</a>
     </div>
@@ -58,8 +68,80 @@
          grouped together in the source design (one design-tool group),
          so they scale together to fill the screen rather than each
          being forced to its own full viewport height. ============ -->
-    <div class="intro-group">
-      <header class="hero">
+    <div class="intro-group" id="intro-group">
+      <!-- ============ Decorative background: a live "day dial" showing
+           a loop of a tracked day (per-client arcs filling in, then a
+           statement card), behind frosted glass UI chips. Adapted from
+           a design-tool reference (temp files/Hero BG · 4++++ Day dial,
+           glass background-html.zip) — values replicated, markup rebuilt
+           as static/vanilla (see js/script.js). Sits behind the whole
+           hero + How-it-works group (not just the hero) so the dial and
+           scrim show through both, instead of being clipped at the
+           hero's own bottom edge. Hidden below 900px to keep the mobile
+           layout simple. ============ -->
+      <div class="hero-bg" aria-hidden="true">
+          <div class="hero-bg-back" id="hero-bg-back">
+            <div class="hero-bg-glow hero-bg-glow--a"></div>
+            <div class="hero-bg-glow hero-bg-glow--b"></div>
+            <div class="hero-dial-wrap" id="hero-dial-wrap">
+              <svg class="hero-dial" viewBox="-480 -480 960 960">
+                <defs>
+                  <linearGradient id="hero-dial-hand-grad" x1="0" y1="0" x2="0" y2="1">
+                    <stop offset="0" stop-color="#33E28A" stop-opacity="1"></stop>
+                    <stop offset="1" stop-color="#33E28A" stop-opacity="0"></stop>
+                  </linearGradient>
+                  <filter id="hero-dial-glow-filter" x="-50%" y="-50%" width="200%" height="200%">
+                    <feGaussianBlur stdDeviation="6"></feGaussianBlur>
+                  </filter>
+                </defs>
+                <circle class="hero-dial-face" cx="0" cy="0" r="470"></circle>
+                <g class="hero-dial-ticks">
+                  <line x1="0.0" y1="-430.0" x2="0.0" y2="-442.0" class="hero-dial-tick"></line><text x="0.0" y="-458.0" class="hero-dial-tick-label">09</text>
+                  <line x1="252.7" y1="-347.9" x2="259.8" y2="-357.6" class="hero-dial-tick"></line><text x="269.2" y="-370.5" class="hero-dial-tick-label">10</text>
+                  <line x1="409.0" y1="-132.9" x2="420.4" y2="-136.6" class="hero-dial-tick"></line><text x="435.6" y="-141.5" class="hero-dial-tick-label">11</text>
+                  <line x1="409.0" y1="132.9" x2="420.4" y2="136.6" class="hero-dial-tick"></line><text x="435.6" y="141.5" class="hero-dial-tick-label">12</text>
+                  <line x1="252.7" y1="347.9" x2="259.8" y2="357.6" class="hero-dial-tick"></line><text x="269.2" y="370.5" class="hero-dial-tick-label">13</text>
+                  <line x1="0.0" y1="430.0" x2="0.0" y2="442.0" class="hero-dial-tick"></line><text x="0.0" y="458.0" class="hero-dial-tick-label">14</text>
+                  <line x1="-252.7" y1="347.9" x2="-259.8" y2="357.6" class="hero-dial-tick"></line><text x="-269.2" y="370.5" class="hero-dial-tick-label">15</text>
+                  <line x1="-409.0" y1="132.9" x2="-420.4" y2="136.6" class="hero-dial-tick"></line><text x="-435.6" y="141.5" class="hero-dial-tick-label">16</text>
+                  <line x1="-409.0" y1="-132.9" x2="-420.4" y2="-136.6" class="hero-dial-tick"></line><text x="-435.6" y="-141.5" class="hero-dial-tick-label">17</text>
+                  <line x1="-252.7" y1="-347.9" x2="-259.8" y2="-357.6" class="hero-dial-tick"></line><text x="-269.2" y="-370.5" class="hero-dial-tick-label">18</text>
+                </g>
+                <g class="hero-dial-rings" id="hero-dial-rings"></g>
+                <g class="hero-dial-hand" id="hero-dial-hand">
+                  <line x1="0" y1="0" x2="0" y2="-452" class="hero-dial-hand-glow" filter="url(#hero-dial-glow-filter)"></line>
+                  <line x1="0" y1="40" x2="0" y2="-452" class="hero-dial-hand-line" stroke="url(#hero-dial-hand-grad)"></line>
+                  <circle cx="0" cy="-452" r="7" class="hero-dial-hand-dot"></circle>
+                </g>
+              </svg>
+              <div class="hero-dial-spotlight" id="hero-dial-spotlight"></div>
+            </div>
+          </div>
+
+          <div class="hero-scrim"></div>
+
+          <div class="hero-bg-front" id="hero-bg-front">
+            <div class="hero-chip-row--top">
+              <div class="hero-chip hero-chip--status">
+                <span class="hero-chip-dot"></span>Tracking locally
+              </div>
+            </div>
+            <!-- Single "Client" chip that changes state rather than two
+                 separate cards on screen at once: it shows "Now working
+                 on" + whichever client is active while the day plays
+                 out, then swaps in place to "Statement" once the day
+                 completes. -->
+            <div class="hero-chip hero-chip--who" id="hero-client-chip" role="status">
+              <span class="mono hero-chip-label" id="hero-client-label">Now working on</span>
+              <span class="hero-chip-who-row" id="hero-client-row">
+                <span class="hero-chip-who-dot" id="hero-who-dot"></span>
+                <span id="hero-who-name">Acme Co. &middot; Brand refresh</span><span class="hero-chip-highlight" id="hero-client-suffix"></span>
+              </span>
+            </div>
+          </div>
+      </div>
+
+      <header class="hero" id="hero">
         <div class="container hero-inner">
           <h1 class="h hero-heading">Track your time.<br />Bill your clients.<br /><span class="accent">No cloud required.</span></h1>
           <div class="hero-aside">
@@ -95,7 +177,6 @@
       <div class="colorblock reveal" style="--reveal-delay: 0.16s;">
         <div class="colorblock-top">
           <span class="mono">03 &mdash; Get paid</span>
-          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="4" width="18" height="16" rx="2"></rect><path d="M3 10h18M3 15h18M9 4v16"></path></svg>
         </div>
         <div>
           <p class="colorblock-title">Share &amp; get paid</p>
@@ -166,93 +247,124 @@
       <div class="container split-head">
         <div class="split-head-main">
           <p class="mono reveal">Why Klok</p>
-          <h2 class="h reveal" style="--reveal-delay: 0.08s;">No cloud<br />required.</h2>
+          <h2 class="h reveal" style="--reveal-delay: 0.08s;">Everything stays.<br /><span class="accent">One page leaves.</span></h2>
         </div>
         <p class="lede split-head-aside reveal" style="--reveal-delay: 0.16s;">Your hours never leave your Mac while you work. Klok only writes to Google Sheets when you ask it to.</p>
       </div>
 
-      <div class="container cloud-grid reveal" style="--reveal-delay: 0.24s;">
-        <div class="cloud-card">
-          <div class="cloud-card-top">
-            <span class="mono">Stays on your Mac</span>
+      <div class="container transfer-grid reveal" style="--reveal-delay: 0.24s;">
+        <div class="transfer-col">
+          <div class="transfer-ring-row">
+            <svg class="transfer-ring" viewBox="0 0 512 512" aria-hidden="true"><circle cx="256.0" cy="44.0" r="16.0" class="dot-rose"></circle><circle cx="291.8" cy="47.0" r="16.0" class="dot-rose"></circle><circle cx="326.6" cy="56.1" r="16.0" class="dot-rose"></circle><circle cx="359.4" cy="70.9" r="16.0" class="dot-rose"></circle><circle cx="389.2" cy="91.1" r="16.0" class="dot-rose"></circle><circle cx="415.1" cy="115.9" r="16.0" class="dot-rose"></circle><circle cx="436.5" cy="144.8" r="16.0" class="dot-rose"></circle><circle cx="452.7" cy="177.0" r="16.0" class="dot-rose"></circle><circle cx="463.2" cy="211.3" r="16.0" class="dot-rose"></circle><circle cx="467.8" cy="247.0" r="16.0" class="dot-rose"></circle><circle cx="466.3" cy="282.9" r="16.0" class="dot-rose"></circle><circle cx="458.7" cy="318.1" r="16.0" class="dot-rose"></circle><circle cx="445.3" cy="351.4" r="16.0" class="dot-rose"></circle><circle cx="426.4" cy="382.1" r="16.0" class="dot-rose"></circle><circle cx="402.7" cy="409.1" r="16.0" class="dot-rose"></circle><circle cx="374.7" cy="431.6" r="16.0" class="dot-rose"></circle><circle cx="343.3" cy="449.2" r="16.0" class="dot-rose"></circle><circle cx="309.4" cy="461.2" r="16.0" class="dot-rose"></circle><circle cx="274.0" cy="467.2" r="16.0" class="dot-rose"></circle><circle cx="238.0" cy="467.2" r="16.0" class="dot-rose"></circle><circle cx="202.6" cy="461.2" r="16.0" class="dot-rose"></circle><circle cx="168.7" cy="449.2" r="16.0" class="dot-rose"></circle><circle cx="137.3" cy="431.6" r="16.0" class="dot-rose"></circle><circle cx="109.3" cy="409.1" r="16.0" class="dot-rose"></circle><circle cx="85.6" cy="382.1" r="16.0" class="dot-rose"></circle><circle cx="66.7" cy="351.4" r="16.0" class="dot-rose"></circle><circle cx="53.3" cy="318.1" r="16.0" class="dot-rose"></circle><circle cx="45.7" cy="282.9" r="10.0" class="dot-ghost"></circle><circle cx="44.2" cy="247.0" r="10.0" class="dot-ghost"></circle><circle cx="48.8" cy="211.3" r="10.0" class="dot-ghost"></circle><circle cx="59.3" cy="177.0" r="10.0" class="dot-ghost"></circle><circle cx="75.5" cy="144.8" r="10.0" class="dot-ghost"></circle><circle cx="96.9" cy="115.9" r="10.0" class="dot-ghost"></circle><circle cx="122.8" cy="91.1" r="10.0" class="dot-ghost"></circle><circle cx="152.6" cy="70.9" r="10.0" class="dot-ghost"></circle><circle cx="185.4" cy="56.1" r="10.0" class="dot-ghost"></circle><circle cx="220.2" cy="47.0" r="10.0" class="dot-ghost"></circle><circle cx="256.0" cy="88.0" r="16.0" class="dot-orange"></circle><circle cx="292.1" cy="91.9" r="16.0" class="dot-orange"></circle><circle cx="326.5" cy="103.5" r="16.0" class="dot-orange"></circle><circle cx="357.7" cy="122.3" r="16.0" class="dot-orange"></circle><circle cx="384.0" cy="147.2" r="16.0" class="dot-orange"></circle><circle cx="404.4" cy="177.3" r="16.0" class="dot-orange"></circle><circle cx="417.9" cy="211.1" r="16.0" class="dot-orange"></circle><circle cx="423.8" cy="246.9" r="16.0" class="dot-orange"></circle><circle cx="421.8" cy="283.2" r="16.0" class="dot-orange"></circle><circle cx="412.1" cy="318.2" r="16.0" class="dot-orange"></circle><circle cx="395.1" cy="350.3" r="16.0" class="dot-orange"></circle><circle cx="371.5" cy="378.0" r="16.0" class="dot-orange"></circle><circle cx="342.6" cy="400.0" r="16.0" class="dot-orange"></circle><circle cx="309.6" cy="415.2" r="16.0" class="dot-orange"></circle><circle cx="274.2" cy="423.0" r="16.0" class="dot-orange"></circle><circle cx="237.8" cy="423.0" r="16.0" class="dot-orange"></circle><circle cx="202.4" cy="415.2" r="10.0" class="dot-ghost"></circle><circle cx="169.4" cy="400.0" r="10.0" class="dot-ghost"></circle><circle cx="140.5" cy="378.0" r="10.0" class="dot-ghost"></circle><circle cx="116.9" cy="350.3" r="10.0" class="dot-ghost"></circle><circle cx="99.9" cy="318.2" r="10.0" class="dot-ghost"></circle><circle cx="90.2" cy="283.2" r="10.0" class="dot-ghost"></circle><circle cx="88.2" cy="246.9" r="10.0" class="dot-ghost"></circle><circle cx="94.1" cy="211.1" r="10.0" class="dot-ghost"></circle><circle cx="107.6" cy="177.3" r="10.0" class="dot-ghost"></circle><circle cx="128.0" cy="147.2" r="10.0" class="dot-ghost"></circle><circle cx="154.3" cy="122.3" r="10.0" class="dot-ghost"></circle><circle cx="185.5" cy="103.5" r="10.0" class="dot-ghost"></circle><circle cx="219.9" cy="91.9" r="10.0" class="dot-ghost"></circle><circle cx="256.0" cy="132.0" r="16.0" class="dot-yellow"></circle><circle cx="290.9" cy="137.0" r="16.0" class="dot-yellow"></circle><circle cx="323.0" cy="151.7" r="16.0" class="dot-yellow"></circle><circle cx="349.7" cy="174.8" r="16.0" class="dot-yellow"></circle><circle cx="368.8" cy="204.5" r="16.0" class="dot-yellow"></circle><circle cx="378.7" cy="238.4" r="16.0" class="dot-yellow"></circle><circle cx="378.7" cy="273.6" r="16.0" class="dot-yellow"></circle><circle cx="368.8" cy="307.5" r="16.0" class="dot-yellow"></circle><circle cx="349.7" cy="337.2" r="16.0" class="dot-yellow"></circle><circle cx="323.0" cy="360.3" r="10.0" class="dot-ghost"></circle><circle cx="290.9" cy="375.0" r="10.0" class="dot-ghost"></circle><circle cx="256.0" cy="380.0" r="10.0" class="dot-ghost"></circle><circle cx="221.1" cy="375.0" r="10.0" class="dot-ghost"></circle><circle cx="189.0" cy="360.3" r="10.0" class="dot-ghost"></circle><circle cx="162.3" cy="337.2" r="10.0" class="dot-ghost"></circle><circle cx="143.2" cy="307.5" r="10.0" class="dot-ghost"></circle><circle cx="133.3" cy="273.6" r="10.0" class="dot-ghost"></circle><circle cx="133.3" cy="238.4" r="10.0" class="dot-ghost"></circle><circle cx="143.2" cy="204.5" r="10.0" class="dot-ghost"></circle><circle cx="162.3" cy="174.8" r="10.0" class="dot-ghost"></circle><circle cx="189.0" cy="151.7" r="10.0" class="dot-ghost"></circle><circle cx="221.1" cy="137.0" r="10.0" class="dot-ghost"></circle></svg>
+            <div>
+              <div class="clock transfer-stat">100%</div>
+              <div class="transfer-stat-label">Stays on your Mac</div>
+            </div>
           </div>
-          <ul class="cloud-list">
-            <li><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12l5 5 9-10"></path></svg><span>Running timers and manual entries</span></li>
-            <li><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12l5 5 9-10"></path></svg><span>Clients and projects</span></li>
-            <li><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12l5 5 9-10"></path></svg><span>Your full, detailed time log</span></li>
-          </ul>
+          <div class="transfer-list-wrap">
+            <ul class="transfer-list">
+              <li>Running timers and manual entries</li>
+              <li>Clients and projects</li>
+              <li>Your full, detailed time log</li>
+            </ul>
+          </div>
         </div>
 
-        <div class="cloud-arrow" aria-hidden="true">
-          <span class="cloud-arrow-icon">
-            <svg width="120" height="16" viewBox="0 0 120 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M2 8h114M108 2l8 6-8 6"></path></svg>
-          </span>
-          <span class="small cloud-arrow-caption">Only when you<br />generate a statement</span>
+        <div class="transfer-center">
+          <svg class="transfer-track" viewBox="0 0 300 20" aria-hidden="true"><circle cx="10.0" cy="10.0" r="4.0" class="dot-ghost"></circle><circle cx="30.0" cy="10.0" r="4.0" class="dot-ghost"></circle><circle cx="50.0" cy="10.0" r="4.0" class="dot-ghost"></circle><circle cx="70.0" cy="10.0" r="4.0" class="dot-ghost"></circle><circle cx="90.0" cy="10.0" r="4.0" class="dot-ghost"></circle><circle cx="110.0" cy="10.0" r="4.0" class="dot-ghost"></circle><circle cx="130.0" cy="10.0" r="4.0" class="dot-ghost"></circle><circle cx="150.0" cy="10.0" r="4.0" class="dot-ghost"></circle><circle cx="170.0" cy="10.0" r="4.0" class="dot-ghost"></circle><circle cx="190.0" cy="10.0" r="4.0" class="dot-ghost"></circle><circle cx="210.0" cy="10.0" r="4.0" class="dot-ghost"></circle><circle cx="230.0" cy="10.0" r="4.0" class="dot-ghost"></circle><circle cx="250.0" cy="10.0" r="4.0" class="dot-ghost"></circle><circle cx="270.0" cy="10.0" r="4.0" class="dot-ghost"></circle><circle cx="290.0" cy="10.0" r="4.0" class="dot-ghost"></circle><circle class="dot-mint why-anim" style="animation-name:why-b0" cx="10" cy="10" r="7"></circle><circle class="dot-mint why-anim" style="animation-name:why-b1" cx="30" cy="10" r="7"></circle><circle class="dot-mint why-anim" style="animation-name:why-b2" cx="50" cy="10" r="7"></circle><circle class="dot-mint why-anim" style="animation-name:why-b3" cx="70" cy="10" r="7"></circle><circle class="dot-mint why-anim" style="animation-name:why-b4" cx="90" cy="10" r="7"></circle><circle class="dot-mint why-anim" style="animation-name:why-b5" cx="110" cy="10" r="7"></circle><circle class="dot-mint why-anim" style="animation-name:why-b6" cx="130" cy="10" r="7"></circle><circle class="dot-mint why-anim" style="animation-name:why-b7" cx="150" cy="10" r="7"></circle><circle class="dot-mint why-anim" style="animation-name:why-b8" cx="170" cy="10" r="7"></circle><circle class="dot-mint why-anim" style="animation-name:why-b9" cx="190" cy="10" r="7"></circle><circle class="dot-mint why-anim" style="animation-name:why-b10" cx="210" cy="10" r="7"></circle><circle class="dot-mint why-anim" style="animation-name:why-b11" cx="230" cy="10" r="7"></circle><circle class="dot-mint why-anim" style="animation-name:why-b12" cx="250" cy="10" r="7"></circle><circle class="dot-mint why-anim" style="animation-name:why-b13" cx="270" cy="10" r="7"></circle><circle class="dot-mint why-anim" style="animation-name:why-b14" cx="290" cy="10" r="7"></circle></svg>
+          <span class="transfer-pill">Generate statement</span>
+          <span class="small transfer-caption">The only moment anything leaves.</span>
         </div>
 
-        <div class="cloud-card">
-          <div class="cloud-card-top">
-            <span class="mono">Goes to your Google Sheet</span>
-            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="4" width="18" height="16" rx="2"></rect><path d="M3 10h18M3 15h18M9 4v16"></path></svg>
+        <div class="transfer-col transfer-col--right">
+          <div class="transfer-ring-row transfer-ring-row--reverse">
+            <svg class="transfer-ring" viewBox="0 0 512 512" aria-hidden="true"><circle cx="256.0" cy="44.0" r="10.0" class="dot-ghost"></circle><circle cx="291.8" cy="47.0" r="10.0" class="dot-ghost"></circle><circle cx="326.6" cy="56.1" r="10.0" class="dot-ghost"></circle><circle cx="359.4" cy="70.9" r="10.0" class="dot-ghost"></circle><circle cx="389.2" cy="91.1" r="10.0" class="dot-ghost"></circle><circle cx="415.1" cy="115.9" r="10.0" class="dot-ghost"></circle><circle cx="436.5" cy="144.8" r="10.0" class="dot-ghost"></circle><circle cx="452.7" cy="177.0" r="10.0" class="dot-ghost"></circle><circle cx="463.2" cy="211.3" r="10.0" class="dot-ghost"></circle><circle cx="467.8" cy="247.0" r="10.0" class="dot-ghost"></circle><circle cx="466.3" cy="282.9" r="10.0" class="dot-ghost"></circle><circle cx="458.7" cy="318.1" r="10.0" class="dot-ghost"></circle><circle cx="445.3" cy="351.4" r="10.0" class="dot-ghost"></circle><circle cx="426.4" cy="382.1" r="10.0" class="dot-ghost"></circle><circle cx="402.7" cy="409.1" r="10.0" class="dot-ghost"></circle><circle cx="374.7" cy="431.6" r="10.0" class="dot-ghost"></circle><circle cx="343.3" cy="449.2" r="10.0" class="dot-ghost"></circle><circle cx="309.4" cy="461.2" r="10.0" class="dot-ghost"></circle><circle cx="274.0" cy="467.2" r="10.0" class="dot-ghost"></circle><circle cx="238.0" cy="467.2" r="10.0" class="dot-ghost"></circle><circle cx="202.6" cy="461.2" r="10.0" class="dot-ghost"></circle><circle cx="168.7" cy="449.2" r="10.0" class="dot-ghost"></circle><circle cx="137.3" cy="431.6" r="10.0" class="dot-ghost"></circle><circle cx="109.3" cy="409.1" r="10.0" class="dot-ghost"></circle><circle cx="85.6" cy="382.1" r="10.0" class="dot-ghost"></circle><circle cx="66.7" cy="351.4" r="10.0" class="dot-ghost"></circle><circle cx="53.3" cy="318.1" r="10.0" class="dot-ghost"></circle><circle cx="45.7" cy="282.9" r="10.0" class="dot-ghost"></circle><circle cx="44.2" cy="247.0" r="10.0" class="dot-ghost"></circle><circle cx="48.8" cy="211.3" r="10.0" class="dot-ghost"></circle><circle cx="59.3" cy="177.0" r="10.0" class="dot-ghost"></circle><circle cx="75.5" cy="144.8" r="10.0" class="dot-ghost"></circle><circle cx="96.9" cy="115.9" r="10.0" class="dot-ghost"></circle><circle cx="122.8" cy="91.1" r="10.0" class="dot-ghost"></circle><circle cx="152.6" cy="70.9" r="10.0" class="dot-ghost"></circle><circle cx="185.4" cy="56.1" r="10.0" class="dot-ghost"></circle><circle cx="220.2" cy="47.0" r="10.0" class="dot-ghost"></circle><circle cx="256.0" cy="88.0" r="10.0" class="dot-ghost"></circle><circle cx="292.1" cy="91.9" r="10.0" class="dot-ghost"></circle><circle cx="326.5" cy="103.5" r="10.0" class="dot-ghost"></circle><circle cx="357.7" cy="122.3" r="10.0" class="dot-ghost"></circle><circle cx="384.0" cy="147.2" r="10.0" class="dot-ghost"></circle><circle cx="404.4" cy="177.3" r="10.0" class="dot-ghost"></circle><circle cx="417.9" cy="211.1" r="10.0" class="dot-ghost"></circle><circle cx="423.8" cy="246.9" r="10.0" class="dot-ghost"></circle><circle cx="421.8" cy="283.2" r="10.0" class="dot-ghost"></circle><circle cx="412.1" cy="318.2" r="10.0" class="dot-ghost"></circle><circle cx="395.1" cy="350.3" r="10.0" class="dot-ghost"></circle><circle cx="371.5" cy="378.0" r="10.0" class="dot-ghost"></circle><circle cx="342.6" cy="400.0" r="10.0" class="dot-ghost"></circle><circle cx="309.6" cy="415.2" r="10.0" class="dot-ghost"></circle><circle cx="274.2" cy="423.0" r="10.0" class="dot-ghost"></circle><circle cx="237.8" cy="423.0" r="10.0" class="dot-ghost"></circle><circle cx="202.4" cy="415.2" r="10.0" class="dot-ghost"></circle><circle cx="169.4" cy="400.0" r="10.0" class="dot-ghost"></circle><circle cx="140.5" cy="378.0" r="10.0" class="dot-ghost"></circle><circle cx="116.9" cy="350.3" r="10.0" class="dot-ghost"></circle><circle cx="99.9" cy="318.2" r="10.0" class="dot-ghost"></circle><circle cx="90.2" cy="283.2" r="10.0" class="dot-ghost"></circle><circle cx="88.2" cy="246.9" r="10.0" class="dot-ghost"></circle><circle cx="94.1" cy="211.1" r="10.0" class="dot-ghost"></circle><circle cx="107.6" cy="177.3" r="10.0" class="dot-ghost"></circle><circle cx="128.0" cy="147.2" r="10.0" class="dot-ghost"></circle><circle cx="154.3" cy="122.3" r="10.0" class="dot-ghost"></circle><circle cx="185.5" cy="103.5" r="10.0" class="dot-ghost"></circle><circle cx="219.9" cy="91.9" r="10.0" class="dot-ghost"></circle><circle class="dot-rose why-anim" style="animation-name:why-r0" cx="256.0" cy="44.0" r="16"></circle><circle class="dot-rose why-anim" style="animation-name:why-r1" cx="291.8" cy="47.0" r="16"></circle><circle class="dot-rose why-anim" style="animation-name:why-r2" cx="326.6" cy="56.1" r="16"></circle><circle class="dot-rose why-anim" style="animation-name:why-r3" cx="359.4" cy="70.9" r="16"></circle><circle class="dot-rose why-anim" style="animation-name:why-r4" cx="389.2" cy="91.1" r="16"></circle><circle class="dot-rose why-anim" style="animation-name:why-r5" cx="415.1" cy="115.9" r="16"></circle><circle class="dot-rose why-anim" style="animation-name:why-r6" cx="436.5" cy="144.8" r="16"></circle><circle class="dot-rose why-anim" style="animation-name:why-r7" cx="452.7" cy="177.0" r="16"></circle><circle class="dot-rose why-anim" style="animation-name:why-r8" cx="463.2" cy="211.3" r="16"></circle><circle class="dot-rose why-anim" style="animation-name:why-r9" cx="467.8" cy="247.0" r="16"></circle></svg>
+            <div>
+              <div class="clock transfer-stat">1</div>
+              <div class="transfer-stat-label transfer-stat-label--right">Statement goes to your <br> Google Sheet</div>
+            </div>
           </div>
-          <ul class="cloud-list">
-            <li><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12l5 5 9-10"></path></svg><span>The statement for the client and dates you pick</span></li>
-            <li><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12l5 5 9-10"></path></svg><span>Optional: a separate time log sheet, if you link one</span></li>
-            <li><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12l5 5 9-10"></path></svg><span>Nothing else</span></li>
-          </ul>
+          <div class="transfer-list-wrap">
+            <ul class="transfer-list">
+              <li>Statement for the client and dates you pick</li>
+              <li>Optional time log sheet, if you link one</li>
+            </ul>
+          </div>
         </div>
       </div>
     </section>
 
-    <!-- ============ Features: bordered grid ============ -->
+    <!-- ============ Features: animated bento grid ============
+         Adapted from a design-tool reference (temp files/Features · F2b
+         Bento, honed + animated-html.zip) — values replicated, markup
+         rebuilt as static HTML/CSS. One large "core" card (statement
+         mock that loops: pick range → press Generate → time-log dots
+         fill in → "Sent to your Sheet ✓"), four small cards with looping
+         dot-matrix glyphs, and a full-width bar card. All motion is pure
+         CSS and stops under prefers-reduced-motion. ============ -->
     <section class="section section--divider" id="features" aria-labelledby="features-heading">
       <div class="container">
         <p class="mono reveal">Features</p>
         <h2 class="h features-heading reveal" id="features-heading" style="--reveal-delay: 0.08s;">Built for <span class="accent">billing.</span></h2>
       </div>
 
-      <div class="container features-grid">
-        <div class="feature-cell reveal">
-          <span class="clock accent">01</span>
-          <div>
-            <h3 class="feature-title">Local-first</h3>
-            <p class="small">Your time data lives on your Mac. No account, no hosted database, no monthly fee to store your own hours.</p>
-          </div>
-        </div>
-        <div class="feature-cell reveal" style="--reveal-delay: 0.04s;">
-          <span class="clock accent">02</span>
-          <div>
-            <h3 class="feature-title">Clients &amp; projects</h3>
-            <p class="small">Organize time under clients, with multiple projects per client, and filter your log by either.</p>
-          </div>
-        </div>
-        <div class="feature-cell reveal" style="--reveal-delay: 0.08s;">
-          <span class="clock accent">03</span>
-          <div>
-            <h3 class="feature-title">One-click statements</h3>
-            <p class="small">Turn any date range into a clean, shareable statement in seconds.</p>
-          </div>
-        </div>
-        <div class="feature-cell reveal" style="--reveal-delay: 0.12s;">
-          <span class="clock accent">04</span>
-          <div>
-            <h3 class="feature-title">Sheets sync, only when you need it</h3>
-            <p class="small">Klok syncs to your linked sheet only when you generate a statement — not continuously. You're always in control of what gets shared.</p>
-          </div>
-        </div>
-        <div class="feature-cell reveal" style="--reveal-delay: 0.16s;">
-          <span class="clock accent">05</span>
-          <div>
-            <h3 class="feature-title">Use sheets you already have</h3>
-            <p class="small">No proprietary invoicing tool to learn. Your client just opens a Google Sheet.</p>
-          </div>
-        </div>
-        <div class="feature-cell reveal" style="--reveal-delay: 0.2s;">
-          <span class="clock accent">06</span>
-          <div>
-            <h3 class="feature-title">Separate log &amp; statement sheets</h3>
-            <p class="small">Optional: keep your detailed time log private and share only the polished statement — or use one sheet for both.</p>
-          </div>
+      <div class="container">
+        <div class="bento">
+          <article class="bento-card bento-card--core reveal">
+            <div>
+              <p class="mono bento-kicker">The core<span class="bento-sent" aria-hidden="true">Sent to your Sheet &#10003;</span></p>
+              <h3 class="bento-title bento-title--lg">One-click statements</h3>
+              <p class="bento-copy bento-copy--lg">Turn any date range into a clean, shareable statement in seconds.</p>
+            </div>
+            <div class="bento-mock" aria-hidden="true">
+              <div class="bento-mock-controls">
+                <span class="bento-chip">Acme &#9662;</span>
+                <span class="bento-chip bento-chip-d">Oct 1 &ndash; 15</span>
+                <span class="bento-btn">Generate statement</span>
+              </div>
+              <div class="bento-matrix">
+                <svg viewBox="0 0 545 116" aria-hidden="true" focusable="false"><circle class="dot-light bento-ld" style="animation-delay:0.50s" cx="6" cy="6" r="4.6"></circle><circle class="dot-light bento-ld" style="animation-delay:0.51s" cx="19" cy="6" r="4.6"></circle><circle class="dot-light bento-ld" style="animation-delay:0.52s" cx="32" cy="6" r="4.6"></circle><circle class="dot-light bento-ld" style="animation-delay:0.53s" cx="45" cy="6" r="4.6"></circle><circle class="dot-light bento-ld" style="animation-delay:0.54s" cx="58" cy="6" r="4.6"></circle><circle class="dot-light bento-ld" style="animation-delay:0.55s" cx="71" cy="6" r="4.6"></circle><circle class="dot-light bento-ld" style="animation-delay:0.57s" cx="84" cy="6" r="4.6"></circle><circle class="dot-light bento-ld" style="animation-delay:0.58s" cx="97" cy="6" r="4.6"></circle><circle class="dot-light bento-ld" style="animation-delay:0.59s" cx="110" cy="6" r="4.6"></circle><circle class="dot-ghost" cx="123" cy="6" r="2.1"></circle><circle class="dot-ghost" cx="136" cy="6" r="2.1"></circle><circle class="dot-ghost" cx="149" cy="6" r="2.1"></circle><circle class="dot-ghost" cx="162" cy="6" r="2.1"></circle><circle class="dot-ghost" cx="175" cy="6" r="2.1"></circle><circle class="dot-ghost" cx="188" cy="6" r="2.1"></circle><circle class="dot-ghost" cx="201" cy="6" r="2.1"></circle><circle class="dot-ghost" cx="214" cy="6" r="2.1"></circle><circle class="dot-ghost" cx="227" cy="6" r="2.1"></circle><circle class="dot-ghost" cx="240" cy="6" r="2.1"></circle><circle class="dot-ghost" cx="253" cy="6" r="2.1"></circle><circle class="dot-ghost" cx="266" cy="6" r="2.1"></circle><circle class="dot-ghost" cx="279" cy="6" r="2.1"></circle><circle class="dot-ghost" cx="292" cy="6" r="2.1"></circle><circle class="dot-ghost" cx="305" cy="6" r="2.1"></circle><circle class="dot-ghost" cx="318" cy="6" r="2.1"></circle><circle class="dot-ghost" cx="331" cy="6" r="2.1"></circle><circle class="dot-ghost" cx="344" cy="6" r="2.1"></circle><circle class="dot-ghost" cx="357" cy="6" r="2.1"></circle><circle class="dot-ghost" cx="370" cy="6" r="2.1"></circle><circle class="dot-light bento-ld" style="animation-delay:0.82s" cx="383" cy="6" r="4.6"></circle><circle class="dot-light bento-ld" style="animation-delay:0.83s" cx="396" cy="6" r="4.6"></circle><circle class="dot-light bento-ld" style="animation-delay:0.84s" cx="409" cy="6" r="4.6"></circle><circle class="dot-light bento-ld" style="animation-delay:0.85s" cx="422" cy="6" r="4.6"></circle><circle class="dot-light bento-ld" style="animation-delay:0.86s" cx="435" cy="6" r="4.6"></circle><circle class="dot-light bento-ld" style="animation-delay:0.87s" cx="448" cy="6" r="4.6"></circle><circle class="dot-light bento-ld" style="animation-delay:0.89s" cx="461" cy="6" r="4.6"></circle><circle class="dot-light bento-ld" style="animation-delay:0.90s" cx="474" cy="6" r="4.6"></circle><circle class="dot-light bento-ld" style="animation-delay:0.91s" cx="487" cy="6" r="4.6"></circle><circle class="dot-light bento-ld" style="animation-delay:0.92s" cx="500" cy="6" r="4.6"></circle><circle class="dot-light bento-ld" style="animation-delay:0.93s" cx="513" cy="6" r="4.6"></circle><circle class="dot-light bento-ld" style="animation-delay:0.94s" cx="526" cy="6" r="4.6"></circle><circle class="dot-light bento-ld" style="animation-delay:0.95s" cx="539" cy="6" r="4.6"></circle><circle class="dot-ghost" cx="6" cy="19" r="2.1"></circle><circle class="dot-ghost" cx="19" cy="19" r="2.1"></circle><circle class="dot-ghost" cx="32" cy="19" r="2.1"></circle><circle class="dot-ghost" cx="45" cy="19" r="2.1"></circle><circle class="dot-ghost" cx="58" cy="19" r="2.1"></circle><circle class="dot-ghost" cx="71" cy="19" r="2.1"></circle><circle class="dot-ghost" cx="84" cy="19" r="2.1"></circle><circle class="dot-ghost" cx="97" cy="19" r="2.1"></circle><circle class="dot-ghost" cx="110" cy="19" r="2.1"></circle><circle class="dot-ghost" cx="123" cy="19" r="2.1"></circle><circle class="dot-ghost" cx="136" cy="19" r="2.1"></circle><circle class="dot-ghost" cx="149" cy="19" r="2.1"></circle><circle class="dot-ghost" cx="162" cy="19" r="2.1"></circle><circle class="dot-ghost" cx="175" cy="19" r="2.1"></circle><circle class="dot-ghost" cx="188" cy="19" r="2.1"></circle><circle class="dot-ghost" cx="201" cy="19" r="2.1"></circle><circle class="dot-ghost" cx="214" cy="19" r="2.1"></circle><circle class="dot-ghost" cx="227" cy="19" r="2.1"></circle><circle class="dot-ghost" cx="240" cy="19" r="2.1"></circle><circle class="dot-ghost" cx="253" cy="19" r="2.1"></circle><circle class="dot-ghost" cx="266" cy="19" r="2.1"></circle><circle class="dot-ghost" cx="279" cy="19" r="2.1"></circle><circle class="dot-ghost" cx="292" cy="19" r="2.1"></circle><circle class="dot-ghost" cx="305" cy="19" r="2.1"></circle><circle class="dot-ghost" cx="318" cy="19" r="2.1"></circle><circle class="dot-ghost" cx="331" cy="19" r="2.1"></circle><circle class="dot-ghost" cx="344" cy="19" r="2.1"></circle><circle class="dot-ghost" cx="357" cy="19" r="2.1"></circle><circle class="dot-ghost" cx="370" cy="19" r="2.1"></circle><circle class="dot-ghost" cx="383" cy="19" r="2.1"></circle><circle class="dot-ghost" cx="396" cy="19" r="2.1"></circle><circle class="dot-ghost" cx="409" cy="19" r="2.1"></circle><circle class="dot-ghost" cx="422" cy="19" r="2.1"></circle><circle class="dot-ghost" cx="435" cy="19" r="2.1"></circle><circle class="dot-ghost" cx="448" cy="19" r="2.1"></circle><circle class="dot-ghost" cx="461" cy="19" r="2.1"></circle><circle class="dot-ghost" cx="474" cy="19" r="2.1"></circle><circle class="dot-ghost" cx="487" cy="19" r="2.1"></circle><circle class="dot-ghost" cx="500" cy="19" r="2.1"></circle><circle class="dot-ghost" cx="513" cy="19" r="2.1"></circle><circle class="dot-ghost" cx="526" cy="19" r="2.1"></circle><circle class="dot-ghost" cx="539" cy="19" r="2.1"></circle><circle class="dot-rose bento-ld" style="animation-delay:1.14s" cx="6" cy="32" r="4.6"></circle><circle class="dot-rose bento-ld" style="animation-delay:1.15s" cx="19" cy="32" r="4.6"></circle><circle class="dot-rose bento-ld" style="animation-delay:1.16s" cx="32" cy="32" r="4.6"></circle><circle class="dot-rose bento-ld" style="animation-delay:1.17s" cx="45" cy="32" r="4.6"></circle><circle class="dot-rose bento-ld" style="animation-delay:1.18s" cx="58" cy="32" r="4.6"></circle><circle class="dot-rose bento-ld" style="animation-delay:1.20s" cx="71" cy="32" r="4.6"></circle><circle class="dot-rose bento-ld" style="animation-delay:1.21s" cx="84" cy="32" r="4.6"></circle><circle class="dot-rose bento-ld" style="animation-delay:1.22s" cx="97" cy="32" r="4.6"></circle><circle class="dot-rose bento-ld" style="animation-delay:1.23s" cx="110" cy="32" r="4.6"></circle><circle class="dot-rose bento-ld" style="animation-delay:1.24s" cx="123" cy="32" r="4.6"></circle><circle class="dot-rose bento-ld" style="animation-delay:1.25s" cx="136" cy="32" r="4.6"></circle><circle class="dot-rose bento-ld" style="animation-delay:1.26s" cx="149" cy="32" r="4.6"></circle><circle class="dot-rose bento-ld" style="animation-delay:1.27s" cx="162" cy="32" r="4.6"></circle><circle class="dot-rose bento-ld" style="animation-delay:1.28s" cx="175" cy="32" r="4.6"></circle><circle class="dot-ghost" cx="188" cy="32" r="2.1"></circle><circle class="dot-ghost" cx="201" cy="32" r="2.1"></circle><circle class="dot-ghost" cx="214" cy="32" r="2.1"></circle><circle class="dot-ghost" cx="227" cy="32" r="2.1"></circle><circle class="dot-ghost" cx="240" cy="32" r="2.1"></circle><circle class="dot-ghost" cx="253" cy="32" r="2.1"></circle><circle class="dot-ghost" cx="266" cy="32" r="2.1"></circle><circle class="dot-ghost" cx="279" cy="32" r="2.1"></circle><circle class="dot-ghost" cx="292" cy="32" r="2.1"></circle><circle class="dot-ghost" cx="305" cy="32" r="2.1"></circle><circle class="dot-ghost" cx="318" cy="32" r="2.1"></circle><circle class="dot-ghost" cx="331" cy="32" r="2.1"></circle><circle class="dot-ghost" cx="344" cy="32" r="2.1"></circle><circle class="dot-ghost" cx="357" cy="32" r="2.1"></circle><circle class="dot-ghost" cx="370" cy="32" r="2.1"></circle><circle class="dot-ghost" cx="383" cy="32" r="2.1"></circle><circle class="dot-ghost" cx="396" cy="32" r="2.1"></circle><circle class="dot-ghost" cx="409" cy="32" r="2.1"></circle><circle class="dot-ghost" cx="422" cy="32" r="2.1"></circle><circle class="dot-ghost" cx="435" cy="32" r="2.1"></circle><circle class="dot-ghost" cx="448" cy="32" r="2.1"></circle><circle class="dot-ghost" cx="461" cy="32" r="2.1"></circle><circle class="dot-white bento-ld" style="animation-delay:1.54s" cx="474" cy="32" r="4.6"></circle><circle class="dot-white bento-ld" style="animation-delay:1.55s" cx="487" cy="32" r="4.6"></circle><circle class="dot-white bento-ld" style="animation-delay:1.56s" cx="500" cy="32" r="4.6"></circle><circle class="dot-white bento-ld" style="animation-delay:1.57s" cx="513" cy="32" r="4.6"></circle><circle class="dot-white bento-ld" style="animation-delay:1.58s" cx="526" cy="32" r="4.6"></circle><circle class="dot-white bento-ld" style="animation-delay:1.59s" cx="539" cy="32" r="4.6"></circle><circle class="dot-ghost" cx="6" cy="45" r="2.1"></circle><circle class="dot-ghost" cx="19" cy="45" r="2.1"></circle><circle class="dot-ghost" cx="32" cy="45" r="2.1"></circle><circle class="dot-ghost" cx="45" cy="45" r="2.1"></circle><circle class="dot-ghost" cx="58" cy="45" r="2.1"></circle><circle class="dot-ghost" cx="71" cy="45" r="2.1"></circle><circle class="dot-ghost" cx="84" cy="45" r="2.1"></circle><circle class="dot-ghost" cx="97" cy="45" r="2.1"></circle><circle class="dot-ghost" cx="110" cy="45" r="2.1"></circle><circle class="dot-ghost" cx="123" cy="45" r="2.1"></circle><circle class="dot-ghost" cx="136" cy="45" r="2.1"></circle><circle class="dot-ghost" cx="149" cy="45" r="2.1"></circle><circle class="dot-ghost" cx="162" cy="45" r="2.1"></circle><circle class="dot-ghost" cx="175" cy="45" r="2.1"></circle><circle class="dot-ghost" cx="188" cy="45" r="2.1"></circle><circle class="dot-ghost" cx="201" cy="45" r="2.1"></circle><circle class="dot-ghost" cx="214" cy="45" r="2.1"></circle><circle class="dot-ghost" cx="227" cy="45" r="2.1"></circle><circle class="dot-ghost" cx="240" cy="45" r="2.1"></circle><circle class="dot-ghost" cx="253" cy="45" r="2.1"></circle><circle class="dot-ghost" cx="266" cy="45" r="2.1"></circle><circle class="dot-ghost" cx="279" cy="45" r="2.1"></circle><circle class="dot-ghost" cx="292" cy="45" r="2.1"></circle><circle class="dot-ghost" cx="305" cy="45" r="2.1"></circle><circle class="dot-ghost" cx="318" cy="45" r="2.1"></circle><circle class="dot-ghost" cx="331" cy="45" r="2.1"></circle><circle class="dot-ghost" cx="344" cy="45" r="2.1"></circle><circle class="dot-ghost" cx="357" cy="45" r="2.1"></circle><circle class="dot-ghost" cx="370" cy="45" r="2.1"></circle><circle class="dot-ghost" cx="383" cy="45" r="2.1"></circle><circle class="dot-ghost" cx="396" cy="45" r="2.1"></circle><circle class="dot-ghost" cx="409" cy="45" r="2.1"></circle><circle class="dot-ghost" cx="422" cy="45" r="2.1"></circle><circle class="dot-ghost" cx="435" cy="45" r="2.1"></circle><circle class="dot-ghost" cx="448" cy="45" r="2.1"></circle><circle class="dot-ghost" cx="461" cy="45" r="2.1"></circle><circle class="dot-ghost" cx="474" cy="45" r="2.1"></circle><circle class="dot-ghost" cx="487" cy="45" r="2.1"></circle><circle class="dot-ghost" cx="500" cy="45" r="2.1"></circle><circle class="dot-ghost" cx="513" cy="45" r="2.1"></circle><circle class="dot-ghost" cx="526" cy="45" r="2.1"></circle><circle class="dot-ghost" cx="539" cy="45" r="2.1"></circle><circle class="dot-orange bento-ld" style="animation-delay:1.78s" cx="6" cy="58" r="4.6"></circle><circle class="dot-orange bento-ld" style="animation-delay:1.79s" cx="19" cy="58" r="4.6"></circle><circle class="dot-orange bento-ld" style="animation-delay:1.80s" cx="32" cy="58" r="4.6"></circle><circle class="dot-orange bento-ld" style="animation-delay:1.81s" cx="45" cy="58" r="4.6"></circle><circle class="dot-orange bento-ld" style="animation-delay:1.82s" cx="58" cy="58" r="4.6"></circle><circle class="dot-orange bento-ld" style="animation-delay:1.83s" cx="71" cy="58" r="4.6"></circle><circle class="dot-orange bento-ld" style="animation-delay:1.85s" cx="84" cy="58" r="4.6"></circle><circle class="dot-orange bento-ld" style="animation-delay:1.86s" cx="97" cy="58" r="4.6"></circle><circle class="dot-orange bento-ld" style="animation-delay:1.87s" cx="110" cy="58" r="4.6"></circle><circle class="dot-orange bento-ld" style="animation-delay:1.88s" cx="123" cy="58" r="4.6"></circle><circle class="dot-orange bento-ld" style="animation-delay:1.89s" cx="136" cy="58" r="4.6"></circle><circle class="dot-orange bento-ld" style="animation-delay:1.90s" cx="149" cy="58" r="4.6"></circle><circle class="dot-orange bento-ld" style="animation-delay:1.91s" cx="162" cy="58" r="4.6"></circle><circle class="dot-orange bento-ld" style="animation-delay:1.92s" cx="175" cy="58" r="4.6"></circle><circle class="dot-orange bento-ld" style="animation-delay:1.93s" cx="188" cy="58" r="4.6"></circle><circle class="dot-orange bento-ld" style="animation-delay:1.95s" cx="201" cy="58" r="4.6"></circle><circle class="dot-ghost" cx="214" cy="58" r="2.1"></circle><circle class="dot-ghost" cx="227" cy="58" r="2.1"></circle><circle class="dot-ghost" cx="240" cy="58" r="2.1"></circle><circle class="dot-ghost" cx="253" cy="58" r="2.1"></circle><circle class="dot-ghost" cx="266" cy="58" r="2.1"></circle><circle class="dot-ghost" cx="279" cy="58" r="2.1"></circle><circle class="dot-ghost" cx="292" cy="58" r="2.1"></circle><circle class="dot-ghost" cx="305" cy="58" r="2.1"></circle><circle class="dot-ghost" cx="318" cy="58" r="2.1"></circle><circle class="dot-ghost" cx="331" cy="58" r="2.1"></circle><circle class="dot-ghost" cx="344" cy="58" r="2.1"></circle><circle class="dot-ghost" cx="357" cy="58" r="2.1"></circle><circle class="dot-ghost" cx="370" cy="58" r="2.1"></circle><circle class="dot-ghost" cx="383" cy="58" r="2.1"></circle><circle class="dot-ghost" cx="396" cy="58" r="2.1"></circle><circle class="dot-ghost" cx="409" cy="58" r="2.1"></circle><circle class="dot-ghost" cx="422" cy="58" r="2.1"></circle><circle class="dot-ghost" cx="435" cy="58" r="2.1"></circle><circle class="dot-ghost" cx="448" cy="58" r="2.1"></circle><circle class="dot-ghost" cx="461" cy="58" r="2.1"></circle><circle class="dot-white bento-ld" style="animation-delay:2.18s" cx="474" cy="58" r="4.6"></circle><circle class="dot-white bento-ld" style="animation-delay:2.19s" cx="487" cy="58" r="4.6"></circle><circle class="dot-white bento-ld" style="animation-delay:2.20s" cx="500" cy="58" r="4.6"></circle><circle class="dot-white bento-ld" style="animation-delay:2.21s" cx="513" cy="58" r="4.6"></circle><circle class="dot-white bento-ld" style="animation-delay:2.22s" cx="526" cy="58" r="4.6"></circle><circle class="dot-white bento-ld" style="animation-delay:2.23s" cx="539" cy="58" r="4.6"></circle><circle class="dot-ghost" cx="6" cy="71" r="2.1"></circle><circle class="dot-ghost" cx="19" cy="71" r="2.1"></circle><circle class="dot-ghost" cx="32" cy="71" r="2.1"></circle><circle class="dot-ghost" cx="45" cy="71" r="2.1"></circle><circle class="dot-ghost" cx="58" cy="71" r="2.1"></circle><circle class="dot-ghost" cx="71" cy="71" r="2.1"></circle><circle class="dot-ghost" cx="84" cy="71" r="2.1"></circle><circle class="dot-ghost" cx="97" cy="71" r="2.1"></circle><circle class="dot-ghost" cx="110" cy="71" r="2.1"></circle><circle class="dot-ghost" cx="123" cy="71" r="2.1"></circle><circle class="dot-ghost" cx="136" cy="71" r="2.1"></circle><circle class="dot-ghost" cx="149" cy="71" r="2.1"></circle><circle class="dot-ghost" cx="162" cy="71" r="2.1"></circle><circle class="dot-ghost" cx="175" cy="71" r="2.1"></circle><circle class="dot-ghost" cx="188" cy="71" r="2.1"></circle><circle class="dot-ghost" cx="201" cy="71" r="2.1"></circle><circle class="dot-ghost" cx="214" cy="71" r="2.1"></circle><circle class="dot-ghost" cx="227" cy="71" r="2.1"></circle><circle class="dot-ghost" cx="240" cy="71" r="2.1"></circle><circle class="dot-ghost" cx="253" cy="71" r="2.1"></circle><circle class="dot-ghost" cx="266" cy="71" r="2.1"></circle><circle class="dot-ghost" cx="279" cy="71" r="2.1"></circle><circle class="dot-ghost" cx="292" cy="71" r="2.1"></circle><circle class="dot-ghost" cx="305" cy="71" r="2.1"></circle><circle class="dot-ghost" cx="318" cy="71" r="2.1"></circle><circle class="dot-ghost" cx="331" cy="71" r="2.1"></circle><circle class="dot-ghost" cx="344" cy="71" r="2.1"></circle><circle class="dot-ghost" cx="357" cy="71" r="2.1"></circle><circle class="dot-ghost" cx="370" cy="71" r="2.1"></circle><circle class="dot-ghost" cx="383" cy="71" r="2.1"></circle><circle class="dot-ghost" cx="396" cy="71" r="2.1"></circle><circle class="dot-ghost" cx="409" cy="71" r="2.1"></circle><circle class="dot-ghost" cx="422" cy="71" r="2.1"></circle><circle class="dot-ghost" cx="435" cy="71" r="2.1"></circle><circle class="dot-ghost" cx="448" cy="71" r="2.1"></circle><circle class="dot-ghost" cx="461" cy="71" r="2.1"></circle><circle class="dot-ghost" cx="474" cy="71" r="2.1"></circle><circle class="dot-ghost" cx="487" cy="71" r="2.1"></circle><circle class="dot-ghost" cx="500" cy="71" r="2.1"></circle><circle class="dot-ghost" cx="513" cy="71" r="2.1"></circle><circle class="dot-ghost" cx="526" cy="71" r="2.1"></circle><circle class="dot-ghost" cx="539" cy="71" r="2.1"></circle><circle class="dot-yellow bento-ld" style="animation-delay:2.42s" cx="6" cy="84" r="4.6"></circle><circle class="dot-yellow bento-ld" style="animation-delay:2.43s" cx="19" cy="84" r="4.6"></circle><circle class="dot-yellow bento-ld" style="animation-delay:2.44s" cx="32" cy="84" r="4.6"></circle><circle class="dot-yellow bento-ld" style="animation-delay:2.45s" cx="45" cy="84" r="4.6"></circle><circle class="dot-yellow bento-ld" style="animation-delay:2.46s" cx="58" cy="84" r="4.6"></circle><circle class="dot-yellow bento-ld" style="animation-delay:2.48s" cx="71" cy="84" r="4.6"></circle><circle class="dot-yellow bento-ld" style="animation-delay:2.49s" cx="84" cy="84" r="4.6"></circle><circle class="dot-yellow bento-ld" style="animation-delay:2.50s" cx="97" cy="84" r="4.6"></circle><circle class="dot-yellow bento-ld" style="animation-delay:2.51s" cx="110" cy="84" r="4.6"></circle><circle class="dot-yellow bento-ld" style="animation-delay:2.52s" cx="123" cy="84" r="4.6"></circle><circle class="dot-yellow bento-ld" style="animation-delay:2.53s" cx="136" cy="84" r="4.6"></circle><circle class="dot-yellow bento-ld" style="animation-delay:2.54s" cx="149" cy="84" r="4.6"></circle><circle class="dot-ghost" cx="162" cy="84" r="2.1"></circle><circle class="dot-ghost" cx="175" cy="84" r="2.1"></circle><circle class="dot-ghost" cx="188" cy="84" r="2.1"></circle><circle class="dot-ghost" cx="201" cy="84" r="2.1"></circle><circle class="dot-ghost" cx="214" cy="84" r="2.1"></circle><circle class="dot-ghost" cx="227" cy="84" r="2.1"></circle><circle class="dot-ghost" cx="240" cy="84" r="2.1"></circle><circle class="dot-ghost" cx="253" cy="84" r="2.1"></circle><circle class="dot-ghost" cx="266" cy="84" r="2.1"></circle><circle class="dot-ghost" cx="279" cy="84" r="2.1"></circle><circle class="dot-ghost" cx="292" cy="84" r="2.1"></circle><circle class="dot-ghost" cx="305" cy="84" r="2.1"></circle><circle class="dot-ghost" cx="318" cy="84" r="2.1"></circle><circle class="dot-ghost" cx="331" cy="84" r="2.1"></circle><circle class="dot-ghost" cx="344" cy="84" r="2.1"></circle><circle class="dot-ghost" cx="357" cy="84" r="2.1"></circle><circle class="dot-ghost" cx="370" cy="84" r="2.1"></circle><circle class="dot-ghost" cx="383" cy="84" r="2.1"></circle><circle class="dot-ghost" cx="396" cy="84" r="2.1"></circle><circle class="dot-ghost" cx="409" cy="84" r="2.1"></circle><circle class="dot-ghost" cx="422" cy="84" r="2.1"></circle><circle class="dot-ghost" cx="435" cy="84" r="2.1"></circle><circle class="dot-ghost" cx="448" cy="84" r="2.1"></circle><circle class="dot-ghost" cx="461" cy="84" r="2.1"></circle><circle class="dot-ghost" cx="474" cy="84" r="2.1"></circle><circle class="dot-white bento-ld" style="animation-delay:2.83s" cx="487" cy="84" r="4.6"></circle><circle class="dot-white bento-ld" style="animation-delay:2.84s" cx="500" cy="84" r="4.6"></circle><circle class="dot-white bento-ld" style="animation-delay:2.85s" cx="513" cy="84" r="4.6"></circle><circle class="dot-white bento-ld" style="animation-delay:2.86s" cx="526" cy="84" r="4.6"></circle><circle class="dot-white bento-ld" style="animation-delay:2.87s" cx="539" cy="84" r="4.6"></circle><circle class="dot-ghost" cx="6" cy="97" r="2.1"></circle><circle class="dot-ghost" cx="19" cy="97" r="2.1"></circle><circle class="dot-ghost" cx="32" cy="97" r="2.1"></circle><circle class="dot-ghost" cx="45" cy="97" r="2.1"></circle><circle class="dot-ghost" cx="58" cy="97" r="2.1"></circle><circle class="dot-ghost" cx="71" cy="97" r="2.1"></circle><circle class="dot-ghost" cx="84" cy="97" r="2.1"></circle><circle class="dot-ghost" cx="97" cy="97" r="2.1"></circle><circle class="dot-ghost" cx="110" cy="97" r="2.1"></circle><circle class="dot-ghost" cx="123" cy="97" r="2.1"></circle><circle class="dot-ghost" cx="136" cy="97" r="2.1"></circle><circle class="dot-ghost" cx="149" cy="97" r="2.1"></circle><circle class="dot-ghost" cx="162" cy="97" r="2.1"></circle><circle class="dot-ghost" cx="175" cy="97" r="2.1"></circle><circle class="dot-ghost" cx="188" cy="97" r="2.1"></circle><circle class="dot-ghost" cx="201" cy="97" r="2.1"></circle><circle class="dot-ghost" cx="214" cy="97" r="2.1"></circle><circle class="dot-ghost" cx="227" cy="97" r="2.1"></circle><circle class="dot-ghost" cx="240" cy="97" r="2.1"></circle><circle class="dot-ghost" cx="253" cy="97" r="2.1"></circle><circle class="dot-ghost" cx="266" cy="97" r="2.1"></circle><circle class="dot-ghost" cx="279" cy="97" r="2.1"></circle><circle class="dot-ghost" cx="292" cy="97" r="2.1"></circle><circle class="dot-ghost" cx="305" cy="97" r="2.1"></circle><circle class="dot-ghost" cx="318" cy="97" r="2.1"></circle><circle class="dot-ghost" cx="331" cy="97" r="2.1"></circle><circle class="dot-ghost" cx="344" cy="97" r="2.1"></circle><circle class="dot-ghost" cx="357" cy="97" r="2.1"></circle><circle class="dot-ghost" cx="370" cy="97" r="2.1"></circle><circle class="dot-ghost" cx="383" cy="97" r="2.1"></circle><circle class="dot-ghost" cx="396" cy="97" r="2.1"></circle><circle class="dot-ghost" cx="409" cy="97" r="2.1"></circle><circle class="dot-ghost" cx="422" cy="97" r="2.1"></circle><circle class="dot-ghost" cx="435" cy="97" r="2.1"></circle><circle class="dot-ghost" cx="448" cy="97" r="2.1"></circle><circle class="dot-ghost" cx="461" cy="97" r="2.1"></circle><circle class="dot-ghost" cx="474" cy="97" r="2.1"></circle><circle class="dot-ghost" cx="487" cy="97" r="2.1"></circle><circle class="dot-ghost" cx="500" cy="97" r="2.1"></circle><circle class="dot-ghost" cx="513" cy="97" r="2.1"></circle><circle class="dot-ghost" cx="526" cy="97" r="2.1"></circle><circle class="dot-ghost" cx="539" cy="97" r="2.1"></circle><circle class="dot-white bento-ld" style="animation-delay:3.06s" cx="6" cy="110" r="5"></circle><circle class="dot-white bento-ld" style="animation-delay:3.07s" cx="19" cy="110" r="5"></circle><circle class="dot-white bento-ld" style="animation-delay:3.08s" cx="32" cy="110" r="5"></circle><circle class="dot-white bento-ld" style="animation-delay:3.09s" cx="45" cy="110" r="5"></circle><circle class="dot-white bento-ld" style="animation-delay:3.10s" cx="58" cy="110" r="5"></circle><circle class="dot-white bento-ld" style="animation-delay:3.12s" cx="71" cy="110" r="5"></circle><circle class="dot-ghost" cx="84" cy="110" r="2.1"></circle><circle class="dot-ghost" cx="97" cy="110" r="2.1"></circle><circle class="dot-ghost" cx="110" cy="110" r="2.1"></circle><circle class="dot-ghost" cx="123" cy="110" r="2.1"></circle><circle class="dot-ghost" cx="136" cy="110" r="2.1"></circle><circle class="dot-ghost" cx="149" cy="110" r="2.1"></circle><circle class="dot-ghost" cx="162" cy="110" r="2.1"></circle><circle class="dot-ghost" cx="175" cy="110" r="2.1"></circle><circle class="dot-ghost" cx="188" cy="110" r="2.1"></circle><circle class="dot-ghost" cx="201" cy="110" r="2.1"></circle><circle class="dot-ghost" cx="214" cy="110" r="2.1"></circle><circle class="dot-ghost" cx="227" cy="110" r="2.1"></circle><circle class="dot-ghost" cx="240" cy="110" r="2.1"></circle><circle class="dot-ghost" cx="253" cy="110" r="2.1"></circle><circle class="dot-ghost" cx="266" cy="110" r="2.1"></circle><circle class="dot-ghost" cx="279" cy="110" r="2.1"></circle><circle class="dot-ghost" cx="292" cy="110" r="2.1"></circle><circle class="dot-ghost" cx="305" cy="110" r="2.1"></circle><circle class="dot-ghost" cx="318" cy="110" r="2.1"></circle><circle class="dot-ghost" cx="331" cy="110" r="2.1"></circle><circle class="dot-ghost" cx="344" cy="110" r="2.1"></circle><circle class="dot-ghost" cx="357" cy="110" r="2.1"></circle><circle class="dot-ghost" cx="370" cy="110" r="2.1"></circle><circle class="dot-ghost" cx="383" cy="110" r="2.1"></circle><circle class="dot-ghost" cx="396" cy="110" r="2.1"></circle><circle class="dot-ghost" cx="409" cy="110" r="2.1"></circle><circle class="dot-ghost" cx="422" cy="110" r="2.1"></circle><circle class="dot-ghost" cx="435" cy="110" r="2.1"></circle><circle class="dot-mint bento-ld" style="animation-delay:3.43s" cx="448" cy="110" r="5"></circle><circle class="dot-mint bento-ld" style="animation-delay:3.44s" cx="461" cy="110" r="5"></circle><circle class="dot-mint bento-ld" style="animation-delay:3.46s" cx="474" cy="110" r="5"></circle><circle class="dot-mint bento-ld" style="animation-delay:3.47s" cx="487" cy="110" r="5"></circle><circle class="dot-mint bento-ld" style="animation-delay:3.48s" cx="500" cy="110" r="5"></circle><circle class="dot-mint bento-ld" style="animation-delay:3.49s" cx="513" cy="110" r="5"></circle><circle class="dot-mint bento-ld" style="animation-delay:3.50s" cx="526" cy="110" r="5"></circle><circle class="dot-mint bento-ld" style="animation-delay:3.51s" cx="539" cy="110" r="5"></circle></svg>
+              </div>
+            </div>
+          </article>
+
+          <article class="bento-card reveal" style="--reveal-delay: 0.04s;">
+            <div class="bento-glyph"><svg viewBox="0 0 120 120" aria-hidden="true" focusable="false"><circle class="dot-ghost" cx="60" cy="10" r="2.6"></circle><circle class="dot-ghost" cx="72" cy="11.5" r="2.6"></circle><circle class="dot-ghost" cx="83.2" cy="15.7" r="2.6"></circle><circle class="dot-ghost" cx="93.2" cy="22.6" r="2.6"></circle><circle class="dot-ghost" cx="101.1" cy="31.6" r="2.6"></circle><circle class="dot-ghost" cx="106.8" cy="42.3" r="2.6"></circle><circle class="dot-ghost" cx="109.6" cy="54" r="2.6"></circle><circle class="dot-ghost" cx="109.6" cy="66" r="2.6"></circle><circle class="dot-ghost" cx="106.8" cy="77.7" r="2.6"></circle><circle class="dot-ghost" cx="101.1" cy="88.4" r="2.6"></circle><circle class="dot-ghost" cx="93.2" cy="97.4" r="2.6"></circle><circle class="dot-ghost" cx="83.2" cy="104.3" r="2.6"></circle><circle class="dot-ghost" cx="72" cy="108.5" r="2.6"></circle><circle class="dot-ghost" cx="60" cy="110" r="2.6"></circle><circle class="dot-ghost" cx="48" cy="108.5" r="2.6"></circle><circle class="dot-ghost" cx="36.8" cy="104.3" r="2.6"></circle><circle class="dot-ghost" cx="26.8" cy="97.4" r="2.6"></circle><circle class="dot-ghost" cx="18.9" cy="88.4" r="2.6"></circle><circle class="dot-ghost" cx="13.2" cy="77.7" r="2.6"></circle><circle class="dot-ghost" cx="10.4" cy="66" r="2.6"></circle><circle class="dot-ghost" cx="10.4" cy="54" r="2.6"></circle><circle class="dot-ghost" cx="13.2" cy="42.3" r="2.6"></circle><circle class="dot-ghost" cx="18.9" cy="31.6" r="2.6"></circle><circle class="dot-ghost" cx="26.8" cy="22.6" r="2.6"></circle><circle class="dot-ghost" cx="36.8" cy="15.7" r="2.6"></circle><circle class="dot-ghost" cx="48" cy="11.5" r="2.6"></circle><g class="bento-spin" style="animation-duration:13s;animation-timing-function:steps(26)"><circle class="dot-mint" cx="60" cy="10" r="4.2"></circle><circle class="dot-mint" cx="72" cy="11.5" r="4.2"></circle><circle class="dot-mint" cx="83.2" cy="15.7" r="4.2"></circle><circle class="dot-mint" cx="93.2" cy="22.6" r="4.2"></circle><circle class="dot-mint" cx="101.1" cy="31.6" r="4.2"></circle><circle class="dot-mint" cx="106.8" cy="42.3" r="4.2"></circle><circle class="dot-mint" cx="109.6" cy="54" r="4.2"></circle><circle class="dot-mint" cx="109.6" cy="66" r="4.2"></circle><circle class="dot-mint" cx="106.8" cy="77.7" r="4.2"></circle><circle class="dot-mint" cx="101.1" cy="88.4" r="4.2"></circle><circle class="dot-mint" cx="93.2" cy="97.4" r="4.2"></circle><circle class="dot-mint" cx="83.2" cy="104.3" r="4.2"></circle><circle class="dot-mint" cx="72" cy="108.5" r="4.2"></circle><circle class="dot-mint" cx="60" cy="110" r="4.2"></circle><circle class="dot-mint" cx="48" cy="108.5" r="4.2"></circle><circle class="dot-mint" cx="36.8" cy="104.3" r="4.2"></circle><circle class="dot-mint" cx="26.8" cy="97.4" r="4.2"></circle><circle class="dot-mint" cx="18.9" cy="88.4" r="4.2"></circle><circle class="dot-mint" cx="13.2" cy="77.7" r="4.2"></circle><circle class="dot-mint" cx="10.4" cy="66" r="4.2"></circle><circle class="dot-mint" cx="10.4" cy="54" r="4.2"></circle><circle class="dot-mint" cx="13.2" cy="42.3" r="4.2"></circle></g><circle class="dot-ghost" cx="60" cy="26" r="2.4"></circle><circle class="dot-ghost" cx="71.6" cy="28.1" r="2.4"></circle><circle class="dot-ghost" cx="81.9" cy="34" r="2.4"></circle><circle class="dot-ghost" cx="89.4" cy="43" r="2.4"></circle><circle class="dot-ghost" cx="93.5" cy="54.1" r="2.4"></circle><circle class="dot-ghost" cx="93.5" cy="65.9" r="2.4"></circle><circle class="dot-ghost" cx="89.4" cy="77" r="2.4"></circle><circle class="dot-ghost" cx="81.9" cy="86" r="2.4"></circle><circle class="dot-ghost" cx="71.6" cy="91.9" r="2.4"></circle><circle class="dot-ghost" cx="60" cy="94" r="2.4"></circle><circle class="dot-ghost" cx="48.4" cy="91.9" r="2.4"></circle><circle class="dot-ghost" cx="38.1" cy="86" r="2.4"></circle><circle class="dot-ghost" cx="30.6" cy="77" r="2.4"></circle><circle class="dot-ghost" cx="26.5" cy="65.9" r="2.4"></circle><circle class="dot-ghost" cx="26.5" cy="54.1" r="2.4"></circle><circle class="dot-ghost" cx="30.6" cy="43" r="2.4"></circle><circle class="dot-ghost" cx="38.1" cy="34" r="2.4"></circle><circle class="dot-ghost" cx="48.4" cy="28.1" r="2.4"></circle><g class="bento-spin" style="animation-duration:9s;animation-timing-function:steps(18)"><circle class="dot-mint" cx="60" cy="26" r="3.6"></circle><circle class="dot-mint" cx="71.6" cy="28.1" r="3.6"></circle><circle class="dot-mint" cx="81.9" cy="34" r="3.6"></circle><circle class="dot-mint" cx="89.4" cy="43" r="3.6"></circle><circle class="dot-mint" cx="93.5" cy="54.1" r="3.6"></circle><circle class="dot-mint" cx="93.5" cy="65.9" r="3.6"></circle><circle class="dot-mint" cx="89.4" cy="77" r="3.6"></circle><circle class="dot-mint" cx="81.9" cy="86" r="3.6"></circle><circle class="dot-mint" cx="71.6" cy="91.9" r="3.6"></circle><circle class="dot-mint" cx="60" cy="94" r="3.6"></circle><circle class="dot-mint" cx="48.4" cy="91.9" r="3.6"></circle></g><circle class="dot-ghost" cx="60" cy="42" r="2"></circle><circle class="dot-ghost" cx="70.6" cy="45.4" r="2"></circle><circle class="dot-ghost" cx="77.1" cy="54.4" r="2"></circle><circle class="dot-ghost" cx="77.1" cy="65.6" r="2"></circle><circle class="dot-ghost" cx="70.6" cy="74.6" r="2"></circle><circle class="dot-ghost" cx="60" cy="78" r="2"></circle><circle class="dot-ghost" cx="49.4" cy="74.6" r="2"></circle><circle class="dot-ghost" cx="42.9" cy="65.6" r="2"></circle><circle class="dot-ghost" cx="42.9" cy="54.4" r="2"></circle><circle class="dot-ghost" cx="49.4" cy="45.4" r="2"></circle><g class="bento-spin" style="animation-duration:5s;animation-timing-function:steps(10)"><circle class="dot-mint" cx="60" cy="42" r="3"></circle><circle class="dot-mint" cx="70.6" cy="45.4" r="3"></circle><circle class="dot-mint" cx="77.1" cy="54.4" r="3"></circle><circle class="dot-mint" cx="77.1" cy="65.6" r="3"></circle></g></svg></div>
+            <div>
+              <h3 class="bento-title">Local-first</h3>
+              <p class="bento-copy">Your time data lives on your Mac. No account, no hosted database, no monthly fee to store your own hours.</p>
+            </div>
+          </article>
+
+          <article class="bento-card reveal" style="--reveal-delay: 0.08s;">
+            <div class="bento-glyph"><svg viewBox="0 0 120 120" aria-hidden="true" focusable="false"><circle class="dot-ghost" cx="60" cy="10" r="2.6"></circle><circle class="dot-ghost" cx="72" cy="11.5" r="2.6"></circle><circle class="dot-ghost" cx="83.2" cy="15.7" r="2.6"></circle><circle class="dot-ghost" cx="93.2" cy="22.6" r="2.6"></circle><circle class="dot-ghost" cx="101.1" cy="31.6" r="2.6"></circle><circle class="dot-ghost" cx="106.8" cy="42.3" r="2.6"></circle><circle class="dot-ghost" cx="109.6" cy="54" r="2.6"></circle><circle class="dot-ghost" cx="109.6" cy="66" r="2.6"></circle><circle class="dot-ghost" cx="106.8" cy="77.7" r="2.6"></circle><circle class="dot-ghost" cx="101.1" cy="88.4" r="2.6"></circle><circle class="dot-ghost" cx="93.2" cy="97.4" r="2.6"></circle><circle class="dot-ghost" cx="83.2" cy="104.3" r="2.6"></circle><circle class="dot-ghost" cx="72" cy="108.5" r="2.6"></circle><circle class="dot-ghost" cx="60" cy="110" r="2.6"></circle><circle class="dot-ghost" cx="48" cy="108.5" r="2.6"></circle><circle class="dot-ghost" cx="36.8" cy="104.3" r="2.6"></circle><circle class="dot-ghost" cx="26.8" cy="97.4" r="2.6"></circle><circle class="dot-ghost" cx="18.9" cy="88.4" r="2.6"></circle><circle class="dot-ghost" cx="13.2" cy="77.7" r="2.6"></circle><circle class="dot-ghost" cx="10.4" cy="66" r="2.6"></circle><circle class="dot-ghost" cx="10.4" cy="54" r="2.6"></circle><circle class="dot-ghost" cx="13.2" cy="42.3" r="2.6"></circle><circle class="dot-ghost" cx="18.9" cy="31.6" r="2.6"></circle><circle class="dot-ghost" cx="26.8" cy="22.6" r="2.6"></circle><circle class="dot-ghost" cx="36.8" cy="15.7" r="2.6"></circle><circle class="dot-ghost" cx="48" cy="11.5" r="2.6"></circle><g class="bento-spin" style="animation-duration:13s;animation-timing-function:steps(26)"><circle class="dot-rose" cx="60" cy="10" r="4.2"></circle><circle class="dot-rose" cx="72" cy="11.5" r="4.2"></circle><circle class="dot-rose" cx="83.2" cy="15.7" r="4.2"></circle><circle class="dot-rose" cx="93.2" cy="22.6" r="4.2"></circle><circle class="dot-rose" cx="101.1" cy="31.6" r="4.2"></circle><circle class="dot-rose" cx="106.8" cy="42.3" r="4.2"></circle><circle class="dot-rose" cx="109.6" cy="54" r="4.2"></circle><circle class="dot-rose" cx="109.6" cy="66" r="4.2"></circle><circle class="dot-rose" cx="106.8" cy="77.7" r="4.2"></circle><circle class="dot-rose" cx="101.1" cy="88.4" r="4.2"></circle><circle class="dot-rose" cx="93.2" cy="97.4" r="4.2"></circle><circle class="dot-rose" cx="83.2" cy="104.3" r="4.2"></circle><circle class="dot-rose" cx="72" cy="108.5" r="4.2"></circle><circle class="dot-rose" cx="60" cy="110" r="4.2"></circle><circle class="dot-rose" cx="48" cy="108.5" r="4.2"></circle><circle class="dot-rose" cx="36.8" cy="104.3" r="4.2"></circle><circle class="dot-rose" cx="26.8" cy="97.4" r="4.2"></circle><circle class="dot-rose" cx="18.9" cy="88.4" r="4.2"></circle><circle class="dot-rose" cx="13.2" cy="77.7" r="4.2"></circle><circle class="dot-rose" cx="10.4" cy="66" r="4.2"></circle><circle class="dot-rose" cx="10.4" cy="54" r="4.2"></circle><circle class="dot-rose" cx="13.2" cy="42.3" r="4.2"></circle></g><circle class="dot-ghost" cx="60" cy="26" r="2.4"></circle><circle class="dot-ghost" cx="71.6" cy="28.1" r="2.4"></circle><circle class="dot-ghost" cx="81.9" cy="34" r="2.4"></circle><circle class="dot-ghost" cx="89.4" cy="43" r="2.4"></circle><circle class="dot-ghost" cx="93.5" cy="54.1" r="2.4"></circle><circle class="dot-ghost" cx="93.5" cy="65.9" r="2.4"></circle><circle class="dot-ghost" cx="89.4" cy="77" r="2.4"></circle><circle class="dot-ghost" cx="81.9" cy="86" r="2.4"></circle><circle class="dot-ghost" cx="71.6" cy="91.9" r="2.4"></circle><circle class="dot-ghost" cx="60" cy="94" r="2.4"></circle><circle class="dot-ghost" cx="48.4" cy="91.9" r="2.4"></circle><circle class="dot-ghost" cx="38.1" cy="86" r="2.4"></circle><circle class="dot-ghost" cx="30.6" cy="77" r="2.4"></circle><circle class="dot-ghost" cx="26.5" cy="65.9" r="2.4"></circle><circle class="dot-ghost" cx="26.5" cy="54.1" r="2.4"></circle><circle class="dot-ghost" cx="30.6" cy="43" r="2.4"></circle><circle class="dot-ghost" cx="38.1" cy="34" r="2.4"></circle><circle class="dot-ghost" cx="48.4" cy="28.1" r="2.4"></circle><g class="bento-spin" style="animation-duration:9s;animation-timing-function:steps(18);animation-direction:reverse"><circle class="dot-orange" cx="60" cy="26" r="3.6"></circle><circle class="dot-orange" cx="71.6" cy="28.1" r="3.6"></circle><circle class="dot-orange" cx="81.9" cy="34" r="3.6"></circle><circle class="dot-orange" cx="89.4" cy="43" r="3.6"></circle><circle class="dot-orange" cx="93.5" cy="54.1" r="3.6"></circle><circle class="dot-orange" cx="93.5" cy="65.9" r="3.6"></circle><circle class="dot-orange" cx="89.4" cy="77" r="3.6"></circle><circle class="dot-orange" cx="81.9" cy="86" r="3.6"></circle><circle class="dot-orange" cx="71.6" cy="91.9" r="3.6"></circle><circle class="dot-orange" cx="60" cy="94" r="3.6"></circle><circle class="dot-orange" cx="48.4" cy="91.9" r="3.6"></circle></g><circle class="dot-ghost" cx="60" cy="42" r="2"></circle><circle class="dot-ghost" cx="70.6" cy="45.4" r="2"></circle><circle class="dot-ghost" cx="77.1" cy="54.4" r="2"></circle><circle class="dot-ghost" cx="77.1" cy="65.6" r="2"></circle><circle class="dot-ghost" cx="70.6" cy="74.6" r="2"></circle><circle class="dot-ghost" cx="60" cy="78" r="2"></circle><circle class="dot-ghost" cx="49.4" cy="74.6" r="2"></circle><circle class="dot-ghost" cx="42.9" cy="65.6" r="2"></circle><circle class="dot-ghost" cx="42.9" cy="54.4" r="2"></circle><circle class="dot-ghost" cx="49.4" cy="45.4" r="2"></circle><g class="bento-spin" style="animation-duration:5s;animation-timing-function:steps(10)"><circle class="dot-yellow" cx="60" cy="42" r="3"></circle><circle class="dot-yellow" cx="70.6" cy="45.4" r="3"></circle><circle class="dot-yellow" cx="77.1" cy="54.4" r="3"></circle><circle class="dot-yellow" cx="77.1" cy="65.6" r="3"></circle></g></svg></div>
+            <div>
+              <h3 class="bento-title">Clients &amp; projects</h3>
+              <p class="bento-copy">Organize time under clients, with multiple projects per client, and filter your log by either.</p>
+            </div>
+          </article>
+
+          <article class="bento-card reveal" style="--reveal-delay: 0.12s;">
+            <div class="bento-glyph bento-glyph--sync"><svg viewBox="0 40 120 40" aria-hidden="true" focusable="false"><circle class="dot-orange" cx="4" cy="42" r="4.2"></circle><circle class="dot-orange" cx="16" cy="42" r="4.2"></circle><circle class="dot-ghost" cx="28" cy="42" r="2.4"></circle><circle class="dot-ghost" cx="40" cy="42" r="2.4"></circle><circle class="dot-orange" cx="4" cy="54" r="4.2"></circle><circle class="dot-orange" cx="16" cy="54" r="4.2"></circle><circle class="dot-ghost" cx="28" cy="54" r="2.4"></circle><circle class="dot-ghost" cx="40" cy="54" r="2.4"></circle><circle class="dot-orange" cx="4" cy="66" r="4.2"></circle><circle class="dot-orange" cx="16" cy="66" r="4.2"></circle><circle class="dot-ghost" cx="28" cy="66" r="2.4"></circle><circle class="dot-ghost" cx="40" cy="66" r="2.4"></circle><circle class="dot-orange" cx="4" cy="78" r="4.2"></circle><circle class="dot-orange" cx="16" cy="78" r="4.2"></circle><circle class="dot-ghost" cx="28" cy="78" r="2.4"></circle><circle class="dot-ghost" cx="40" cy="78" r="2.4"></circle><circle class="dot-ghost" cx="80" cy="42" r="2.4"></circle><circle class="dot-ghost" cx="92" cy="42" r="2.4"></circle><circle class="dot-ghost" cx="104" cy="42" r="2.4"></circle><circle class="dot-ghost" cx="116" cy="42" r="2.4"></circle><circle class="dot-ghost" cx="80" cy="54" r="2.4"></circle><circle class="dot-ghost" cx="92" cy="54" r="2.4"></circle><circle class="dot-ghost" cx="104" cy="54" r="2.4"></circle><circle class="dot-ghost" cx="116" cy="54" r="2.4"></circle><circle class="dot-ghost" cx="80" cy="66" r="2.4"></circle><circle class="dot-ghost" cx="92" cy="66" r="2.4"></circle><circle class="dot-ghost" cx="104" cy="66" r="2.4"></circle><circle class="dot-ghost" cx="116" cy="66" r="2.4"></circle><circle class="dot-ghost" cx="80" cy="78" r="2.4"></circle><circle class="dot-ghost" cx="92" cy="78" r="2.4"></circle><circle class="dot-ghost" cx="104" cy="78" r="2.4"></circle><circle class="dot-ghost" cx="116" cy="78" r="2.4"></circle><g class="bento-rflash"><circle class="dot-rose" cx="80" cy="54" r="4.2"></circle><circle class="dot-rose" cx="92" cy="54" r="4.2"></circle><circle class="dot-rose" cx="104" cy="54" r="4.2"></circle><circle class="dot-rose" cx="116" cy="54" r="4.2"></circle><circle class="dot-rose" cx="80" cy="66" r="4.2"></circle><circle class="dot-rose" cx="92" cy="66" r="4.2"></circle><circle class="dot-rose" cx="104" cy="66" r="4.2"></circle><circle class="dot-rose" cx="116" cy="66" r="4.2"></circle></g><circle class="dot-ghost" cx="48" cy="60" r="3.4"></circle><circle class="dot-ghost" cx="72" cy="60" r="3.4"></circle><circle class="dot-mint bento-trav" cx="40" cy="60" r="6"></circle></svg></div>
+            <div>
+              <h3 class="bento-title">Sheets sync, only when you need it</h3>
+              <p class="bento-copy">Klok syncs to your linked sheet only when you generate a statement — not continuously. You're always in control of what gets shared.</p>
+            </div>
+          </article>
+
+          <article class="bento-card reveal" style="--reveal-delay: 0.16s;">
+            <div class="bento-glyph bento-glyph--sheet"><svg viewBox="4 12 100 78" aria-hidden="true" focusable="false"><circle class="dot-yellow" cx="10" cy="18" r="4"></circle><circle class="dot-yellow" cx="23" cy="18" r="4"></circle><circle class="dot-yellow" cx="36" cy="18" r="4"></circle><circle class="dot-yellow" cx="49" cy="18" r="4"></circle><circle class="dot-yellow" cx="62" cy="18" r="4"></circle><circle class="dot-yellow" cx="75" cy="18" r="4"></circle><circle class="dot-yellow" cx="88" cy="18" r="4"></circle><circle class="dot-yellow" cx="101" cy="18" r="4"></circle><circle class="dot-orange" cx="10" cy="31" r="4"></circle><circle class="dot-ghost" cx="23" cy="31" r="2.3"></circle><circle class="dot-ghost" cx="36" cy="31" r="2.3"></circle><circle class="dot-ghost" cx="49" cy="31" r="2.3"></circle><circle class="dot-ghost" cx="62" cy="31" r="2.3"></circle><circle class="dot-ghost" cx="75" cy="31" r="2.3"></circle><circle class="dot-ghost" cx="88" cy="31" r="2.3"></circle><circle class="dot-ghost" cx="101" cy="31" r="2.3"></circle><circle class="dot-orange" cx="10" cy="44" r="4"></circle><circle class="dot-ghost" cx="23" cy="44" r="2.3"></circle><circle class="dot-ghost" cx="36" cy="44" r="2.3"></circle><circle class="dot-ghost" cx="49" cy="44" r="2.3"></circle><circle class="dot-ghost" cx="62" cy="44" r="2.3"></circle><circle class="dot-ghost" cx="75" cy="44" r="2.3"></circle><circle class="dot-ghost" cx="88" cy="44" r="2.3"></circle><circle class="dot-ghost" cx="101" cy="44" r="2.3"></circle><circle class="dot-orange" cx="10" cy="57" r="4"></circle><circle class="dot-ghost" cx="23" cy="57" r="2.3"></circle><circle class="dot-ghost" cx="36" cy="57" r="2.3"></circle><circle class="dot-ghost" cx="49" cy="57" r="2.3"></circle><circle class="dot-ghost" cx="62" cy="57" r="2.3"></circle><circle class="dot-ghost" cx="75" cy="57" r="2.3"></circle><circle class="dot-ghost" cx="88" cy="57" r="2.3"></circle><circle class="dot-ghost" cx="101" cy="57" r="2.3"></circle><circle class="dot-orange" cx="10" cy="70" r="4"></circle><circle class="dot-ghost" cx="23" cy="70" r="2.3"></circle><circle class="dot-ghost" cx="36" cy="70" r="2.3"></circle><circle class="dot-ghost" cx="49" cy="70" r="2.3"></circle><circle class="dot-ghost" cx="62" cy="70" r="2.3"></circle><circle class="dot-ghost" cx="75" cy="70" r="2.3"></circle><circle class="dot-ghost" cx="88" cy="70" r="2.3"></circle><circle class="dot-ghost" cx="101" cy="70" r="2.3"></circle><circle class="dot-orange" cx="10" cy="83" r="4"></circle><circle class="dot-ghost" cx="23" cy="83" r="2.3"></circle><circle class="dot-ghost" cx="36" cy="83" r="2.3"></circle><circle class="dot-ghost" cx="49" cy="83" r="2.3"></circle><circle class="dot-ghost" cx="62" cy="83" r="2.3"></circle><circle class="dot-ghost" cx="75" cy="83" r="2.3"></circle><circle class="dot-ghost" cx="88" cy="83" r="2.3"></circle><circle class="dot-ghost" cx="101" cy="83" r="2.3"></circle><circle class="dot-white bento-cur" cx="23" cy="31" r="5"></circle></svg></div>
+            <div>
+              <h3 class="bento-title">Use sheets you already have</h3>
+              <p class="bento-copy">No proprietary invoicing tool to learn. Your client just opens a Google Sheet.</p>
+            </div>
+          </article>
+
+          <article class="bento-card bento-card--bar reveal" style="--reveal-delay: 0.2s;">
+            <div class="bento-glyph bento-glyph--rows"><svg viewBox="0 0 120 120" aria-hidden="true" focusable="false"><circle class="dot-ghost" cx="6" cy="12" r="3"></circle><circle class="dot-ghost" cx="15" cy="12" r="3"></circle><circle class="dot-ghost" cx="24" cy="12" r="3"></circle><circle class="dot-ghost" cx="33" cy="12" r="3"></circle><circle class="dot-ghost" cx="42" cy="12" r="3"></circle><circle class="dot-ghost" cx="51" cy="12" r="3"></circle><circle class="dot-ghost" cx="6" cy="21" r="3"></circle><circle class="dot-ghost" cx="15" cy="21" r="3"></circle><circle class="dot-ghost" cx="24" cy="21" r="3"></circle><circle class="dot-ghost" cx="33" cy="21" r="3"></circle><circle class="dot-ghost" cx="42" cy="21" r="3"></circle><circle class="dot-ghost" cx="51" cy="21" r="3"></circle><circle class="dot-ghost" cx="6" cy="30" r="3"></circle><circle class="dot-ghost" cx="15" cy="30" r="3"></circle><circle class="dot-ghost" cx="24" cy="30" r="3"></circle><circle class="dot-ghost" cx="33" cy="30" r="3"></circle><circle class="dot-ghost" cx="42" cy="30" r="3"></circle><circle class="dot-ghost" cx="51" cy="30" r="3"></circle><circle class="dot-ghost" cx="6" cy="39" r="3"></circle><circle class="dot-ghost" cx="15" cy="39" r="3"></circle><circle class="dot-ghost" cx="24" cy="39" r="3"></circle><circle class="dot-ghost" cx="33" cy="39" r="3"></circle><circle class="dot-ghost" cx="42" cy="39" r="3"></circle><circle class="dot-ghost" cx="51" cy="39" r="3"></circle><circle class="dot-ghost" cx="6" cy="48" r="3"></circle><circle class="dot-ghost" cx="15" cy="48" r="3"></circle><circle class="dot-ghost" cx="24" cy="48" r="3"></circle><circle class="dot-ghost" cx="33" cy="48" r="3"></circle><circle class="dot-ghost" cx="42" cy="48" r="3"></circle><circle class="dot-ghost" cx="51" cy="48" r="3"></circle><circle class="dot-ghost" cx="6" cy="57" r="3"></circle><circle class="dot-ghost" cx="15" cy="57" r="3"></circle><circle class="dot-ghost" cx="24" cy="57" r="3"></circle><circle class="dot-ghost" cx="33" cy="57" r="3"></circle><circle class="dot-ghost" cx="42" cy="57" r="3"></circle><circle class="dot-ghost" cx="51" cy="57" r="3"></circle><circle class="dot-ghost" cx="6" cy="66" r="3"></circle><circle class="dot-ghost" cx="15" cy="66" r="3"></circle><circle class="dot-ghost" cx="24" cy="66" r="3"></circle><circle class="dot-ghost" cx="33" cy="66" r="3"></circle><circle class="dot-ghost" cx="42" cy="66" r="3"></circle><circle class="dot-ghost" cx="51" cy="66" r="3"></circle><circle class="dot-ghost" cx="6" cy="75" r="3"></circle><circle class="dot-ghost" cx="15" cy="75" r="3"></circle><circle class="dot-ghost" cx="24" cy="75" r="3"></circle><circle class="dot-ghost" cx="33" cy="75" r="3"></circle><circle class="dot-ghost" cx="42" cy="75" r="3"></circle><circle class="dot-ghost" cx="51" cy="75" r="3"></circle><circle class="dot-ghost" cx="66" cy="36" r="2.4"></circle><circle class="dot-ghost" cx="76" cy="36" r="2.4"></circle><circle class="dot-ghost" cx="86" cy="36" r="2.4"></circle><circle class="dot-ghost" cx="96" cy="36" r="2.4"></circle><circle class="dot-ghost" cx="106" cy="36" r="2.4"></circle><circle class="dot-ghost" cx="66" cy="46" r="2.4"></circle><circle class="dot-ghost" cx="76" cy="46" r="2.4"></circle><circle class="dot-ghost" cx="86" cy="46" r="2.4"></circle><circle class="dot-ghost" cx="96" cy="46" r="2.4"></circle><circle class="dot-ghost" cx="106" cy="46" r="2.4"></circle><circle class="dot-ghost" cx="66" cy="56" r="2.4"></circle><circle class="dot-ghost" cx="76" cy="56" r="2.4"></circle><circle class="dot-ghost" cx="86" cy="56" r="2.4"></circle><circle class="dot-ghost" cx="96" cy="56" r="2.4"></circle><circle class="dot-ghost" cx="106" cy="56" r="2.4"></circle><circle class="dot-ghost" cx="66" cy="66" r="2.4"></circle><circle class="dot-ghost" cx="76" cy="66" r="2.4"></circle><circle class="dot-ghost" cx="86" cy="66" r="2.4"></circle><circle class="dot-ghost" cx="96" cy="66" r="2.4"></circle><circle class="dot-ghost" cx="106" cy="66" r="2.4"></circle><circle class="dot-ghost" cx="66" cy="76" r="2.4"></circle><circle class="dot-ghost" cx="76" cy="76" r="2.4"></circle><circle class="dot-ghost" cx="86" cy="76" r="2.4"></circle><circle class="dot-ghost" cx="96" cy="76" r="2.4"></circle><circle class="dot-ghost" cx="106" cy="76" r="2.4"></circle><g class="bento-srow" style="animation-delay:0.0s"><circle class="dot-rose" cx="66" cy="46" r="3.8"></circle><circle class="dot-rose" cx="76" cy="46" r="3.8"></circle><circle class="dot-rose" cx="86" cy="46" r="3.8"></circle><circle class="dot-rose" cx="96" cy="46" r="3.8"></circle></g><g class="bento-srow" style="animation-delay:0.5s"><circle class="dot-rose" cx="66" cy="56" r="3.8"></circle><circle class="dot-rose" cx="76" cy="56" r="3.8"></circle><circle class="dot-rose" cx="86" cy="56" r="3.8"></circle><circle class="dot-rose" cx="96" cy="56" r="3.8"></circle></g><g class="bento-srow" style="animation-delay:1.0s"><circle class="dot-rose" cx="66" cy="66" r="3.8"></circle><circle class="dot-rose" cx="76" cy="66" r="3.8"></circle><circle class="dot-rose" cx="86" cy="66" r="3.8"></circle><circle class="dot-rose" cx="96" cy="66" r="3.8"></circle></g></svg></div>
+            <h3 class="bento-title bento-bar-title">Separate log &amp; statement sheets</h3>
+            <p class="bento-copy bento-bar-copy">Optional: keep your detailed time log private and share only the polished statement — or use one sheet for both.</p>
+          </article>
         </div>
       </div>
     </section>
@@ -265,66 +377,103 @@
           <h2 class="h reveal" style="--reveal-delay: 0.08s;">Connect<br />Google<br /><span class="accent">Sheets.</span></h2>
           <p class="lede setup-intro-copy reveal" style="--reveal-delay: 0.16s;">Klok keeps your data on your Mac. When you bill a client, it puts the statement in a Google Sheet you link once.</p>
         </div>
-        <div class="setup-list-wrap">
-          <ol class="setup-list">
-            <li class="setup-row reveal" style="--reveal-delay: 0.1s;">
-              <span class="setup-num" aria-hidden="true">1</span>
-              <span class="setup-title">Create a Google Sheet</span>
-              <span class="setup-desc">New or existing — at <a href="https://sheets.google.com" target="_blank" rel="noopener noreferrer">sheets.google.com</a>.</span>
-            </li>
-            <li class="setup-row reveal" style="--reveal-delay: 0.16s;">
-              <span class="setup-num" aria-hidden="true">2</span>
-              <span class="setup-title">Copy its link</span>
-              <span class="setup-desc">Copy the sheet's URL from your browser's address bar.</span>
-            </li>
-            <li class="setup-row reveal" style="--reveal-delay: 0.22s;">
-              <span class="setup-num" aria-hidden="true">3</span>
-              <span class="setup-title">Paste it into Klok</span>
-              <span class="setup-desc">Open a client's settings and paste the link into <strong>Statement Sheet</strong>.</span>
-            </li>
-            <li class="setup-row reveal" style="--reveal-delay: 0.28s;">
-              <span class="setup-num" aria-hidden="true">4</span>
-              <span class="setup-title">Add a time log sheet</span>
-              <span class="setup-desc">Optional. Repeat with a second sheet as a separate <strong>Time Log Sheet</strong> for raw tracked hours.</span>
-            </li>
-            <li class="setup-row reveal" style="--reveal-delay: 0.34s;">
-              <span class="setup-num" aria-hidden="true">5</span>
-              <span class="setup-title">Approve once</span>
-              <span class="setup-desc">The first time you generate a statement, Klok asks permission to write to the sheet. You won't be asked again.</span>
-            </li>
-          </ol>
-          <p class="setup-done reveal" style="--reveal-delay: 0.42s;">
-            <span class="setup-check" aria-hidden="true">
-              <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#0B0D10" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12l5 5 9-10"></path></svg>
-            </span>
-            Done. Every statement lands as a new tab in that sheet, ready to share.
-          </p>
+        <ol class="setup-list reveal" style="--reveal-delay: 0.1s;">
+          <li class="setup-row">
+            <span class="setup-num" aria-hidden="true">1</span>
+            <div>
+              <button type="button" class="setup-title">Create a Google Sheet</button>
+              <div class="setup-desc">New or existing — at <a href="https://sheets.google.com" target="_blank" rel="noopener noreferrer">sheets.google.com</a>.</div>
+            </div>
+          </li>
+          <li class="setup-row">
+            <span class="setup-num" aria-hidden="true">2</span>
+            <div>
+              <button type="button" class="setup-title">Copy its link</button>
+              <div class="setup-desc">Copy the sheet's URL from your browser's address bar.</div>
+            </div>
+          </li>
+          <li class="setup-row">
+            <span class="setup-num" aria-hidden="true">3</span>
+            <div>
+              <button type="button" class="setup-title">Paste it into Klok</button>
+              <div class="setup-desc">Open a client's settings and paste the link into <strong>Statement Sheet</strong>.</div>
+            </div>
+          </li>
+          <li class="setup-row">
+            <span class="setup-num" aria-hidden="true">4</span>
+            <div>
+              <button type="button" class="setup-title">Add a time log sheet</button>
+              <div class="setup-desc">Optional. Repeat with a second sheet as a separate <strong>Time Log Sheet</strong> for raw tracked hours.</div>
+            </div>
+          </li>
+          <li class="setup-row">
+            <span class="setup-num" aria-hidden="true">5</span>
+            <div>
+              <button type="button" class="setup-title">Approve once</button>
+              <div class="setup-desc">The first time you generate a statement, Klok asks permission to write to the sheet. You won't be asked again.</div>
+            </div>
+          </li>
+        </ol>
+
+        <!-- Live scenes: one per step, cross-faded on a shared 22s loop
+             (CSS keyframes in styles.css). Purely decorative. -->
+        <div class="setup-stage reveal" style="--reveal-delay: 0.2s;" aria-hidden="true">
+          <div class="setup-scene setup-scene--1">
+            <p class="setup-lbl setup-lbl--mint">sheets.google.com</p>
+            <div class="setup-grid" id="setup-grid"></div>
+          </div>
+          <div class="setup-scene setup-scene--2">
+            <p class="setup-lbl">Your browser</p>
+            <div class="setup-url">
+              <span class="setup-url-sel"></span>
+              <span class="setup-url-text">docs.google.com/spreadsheets/d/1aB3xK…/edit</span>
+            </div>
+            <span class="setup-pill">Link copied ✓</span>
+          </div>
+          <div class="setup-scene setup-scene--3">
+            <p class="setup-lbl setup-lbl--mint">Acme · client settings</p>
+            <div>
+              <p class="setup-lbl setup-field-lbl">Statement Sheet</p>
+              <div class="setup-field"><span class="setup-type setup-type--1">docs.google.com/spreadsheets/d/1aB3xK…/edit</span></div>
+            </div>
+            <div>
+              <p class="setup-lbl setup-field-lbl">Time Log Sheet</p>
+              <div class="setup-field"></div>
+            </div>
+          </div>
+          <div class="setup-scene setup-scene--4">
+            <p class="setup-lbl setup-lbl--mint">Acme · client settings</p>
+            <div>
+              <p class="setup-lbl setup-field-lbl">Statement Sheet</p>
+              <div class="setup-field"><span class="setup-type">docs.google.com/spreadsheets/d/1aB3xK…/edit</span></div>
+            </div>
+            <div>
+              <p class="setup-lbl setup-field-lbl">Time Log Sheet (optional)</p>
+              <div class="setup-field"><span class="setup-type setup-type--2">docs.google.com/spreadsheets/d/9Zq7mT…/edit</span></div>
+            </div>
+          </div>
+          <div class="setup-scene setup-scene--5">
+            <div class="setup-dialog">
+              <p class="setup-dialog-title">Klok wants to write to your sheet</p>
+              <p class="setup-dialog-copy">So it can add each statement as a new tab. Asked once.</p>
+              <div class="setup-dialog-actions">
+                <span class="setup-ok">Approved ✓</span>
+                <span class="setup-btn">Cancel</span>
+                <span class="setup-btn setup-btn--allow">Allow</span>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
     </section>
 
-    <!-- ============ Download + requirements ============ -->
+    <!-- ============ Download ============ -->
     <section class="section section--divider" id="download" aria-labelledby="download-heading">
       <div class="container download-head">
         <h2 class="h download-heading" id="download-heading">Start tracking<br />in one <span class="accent">download.</span></h2>
         <div class="download-cta">
           <a class="btn-primary" href="downloads/Klok.dmg" download>Download Klok for Mac &mdash; v1.0, 1.9 MB</a>
           <p class="small download-caption">Free. Works entirely offline except when generating a statement.</p>
-        </div>
-      </div>
-
-      <div class="colorblock-grid requirements-grid" id="requirements" aria-label="System requirements">
-        <div class="colorblock colorblock--req reveal">
-          <span class="mono">System requirements &middot; 01</span>
-          <p class="colorblock-reqtext">macOS 14 (Sonoma) or later</p>
-        </div>
-        <div class="colorblock colorblock--req reveal" style="--reveal-delay: 0.08s;">
-          <span class="mono">02</span>
-          <p class="colorblock-reqtext">A free Google account, for the linked sheet</p>
-        </div>
-        <div class="colorblock colorblock--req reveal" style="--reveal-delay: 0.16s;">
-          <span class="mono">03</span>
-          <p class="colorblock-reqtext">No other accounts, subscriptions, or installs</p>
         </div>
       </div>
     </section>
@@ -336,24 +485,20 @@
     <div class="container footer-top">
       <div class="footer-brand">
         <span class="footer-logo">
-          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="12" r="9"></circle><path d="M12 7v5l3 2"></path></svg>
-          <span class="footer-logo-text">KLOK</span>
+          <img class="wordmark" src="assets/klok-brand/wordmark/klok-wordmark-compact.svg" width="69" height="24" alt="Klok" />
         </span>
         <span class="small footer-tagline">Local time tracking for Mac.</span>
       </div>
       <nav class="footer-links" aria-label="Footer">
         <a href="#how" class="btn-ghost">How it works</a>
-        <a href="#requirements" class="btn-ghost">System requirements</a>
-        <!-- PLACEHOLDER: no support/contact channel decided yet -->
-        <a href="#" class="btn-ghost" aria-disabled="true" title="TBD — support channel not yet decided">Contact / feedback <span class="placeholder-text">[TBD]</span></a>
+        <a href="donate.html" class="btn-ghost">Support Klok</a>
+        <a href="mailto:a.gatashov@gmail.com?subject=Klok%20feedback" class="btn-ghost">Contact / feedback</a>
       </nav>
     </div>
 
     <div class="container">
       <p class="mono footer-copyright">&copy; 2026 Klok</p>
     </div>
-
-    <div class="footer-watermark" aria-hidden="true"><span>KLOK</span></div>
   </footer>
 
   <script src="js/script.js"></script>
