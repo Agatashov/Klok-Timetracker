@@ -1,0 +1,152 @@
+<!--
+  Klok — Support / Donate page
+
+  Shares the site's nav/footer chrome and design tokens with index.html,
+  but is NOT a copy of its landing-page structure. index.html's job is a
+  multi-section product pitch (hero + split-head sections + colorblock
+  grid + feature-card grid); this page's job is a single, narrow ask, so
+  it's built as one continuous document-style column (intro -> numbered
+  list -> one card -> plain list) rather than reusing that section
+  pattern. Klok is a free app with no accounts or subscriptions, so this
+  frames support as voluntary, not a paywall. No payment provider has
+  been chosen yet, so the checkout action is a placeholder marked
+  "[TBD]" per the site's existing convention (see the footer's
+  "Contact / feedback" link in index.html).
+-->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Support Klok — Help keep it free</title>
+  <meta name="description" content="Klok is free, with no accounts or subscriptions. If it's useful to you, you can help keep it built and maintained with an optional donation." />
+
+  <meta property="og:type" content="website" />
+  <meta property="og:title" content="Support Klok — Help keep it free" />
+  <meta property="og:description" content="Klok is free, with no accounts or subscriptions. If it's useful to you, you can help keep it built and maintained with an optional donation." />
+  <meta property="og:image" content="assets/klok-brand/web/og-image-1200x630.png" />
+  <meta name="twitter:card" content="summary_large_image" />
+
+  <!-- Icon set: assets/klok-brand/web/ (see assets/klok-brand/web/head-snippet.html) -->
+  <link rel="icon" href="assets/klok-brand/web/favicon.ico" sizes="48x48" />
+  <link rel="icon" href="assets/klok-brand/web/favicon.svg" type="image/svg+xml" />
+  <link rel="apple-touch-icon" href="assets/klok-brand/web/apple-touch-icon.png" />
+  <link rel="manifest" href="assets/klok-brand/web/site.webmanifest" />
+  <meta name="theme-color" content="#121212" />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@600&display=swap" rel="stylesheet" />
+
+  <link rel="stylesheet" href="css/styles.css" />
+</head>
+<body>
+
+  <a class="visually-hidden" href="#main">Skip to content</a>
+
+  <!-- ============ Nav ============ -->
+  <nav class="nav" id="site-nav" aria-label="Main">
+    <div class="container nav-inner">
+      <a href="index.html" class="nav-logo" aria-label="Klok home">
+        <img class="wordmark" src="assets/klok-brand/wordmark/klok-wordmark-compact.svg" width="69" height="24" alt="" />
+      </a>
+      <div class="nav-links">
+        <a href="index.html#how" class="btn-ghost">How it works</a>
+        <a href="index.html#features" class="btn-ghost">Features</a>
+        <a href="index.html#setup" class="btn-ghost">Setup</a>
+        <a href="donate.html" class="btn-ghost" aria-current="page">Support</a>
+      </div>
+      <a href="downloads/Klok.dmg" download class="btn-primary btn-primary--sm">Download for Mac</a>
+    </div>
+  </nav>
+
+  <main id="main">
+    <div class="support-page">
+
+      <!-- ============ Intro: a short statement, not a hero pitch ============ -->
+      <header class="support-intro">
+        <p class="mono">Support</p>
+        <h1 class="h support-heading">Help keep Klok free.</h1>
+        <p class="lede">Klok has no ads, no accounts, and no subscription. It's free to download and free to use. If it's saved you time, here's exactly what an optional donation funds, and a couple of ways to help that don't cost anything.</p>
+      </header>
+
+      <!-- ============ Where it goes: numbered list, not a card grid ============ -->
+      <section class="support-section" aria-labelledby="funds-heading">
+        <h2 class="h support-section-heading" id="funds-heading">Where it goes</h2>
+        <ol class="funds-list">
+          <li class="funds-row">
+            <span class="funds-num" aria-hidden="true">01</span>
+            <span class="funds-title">Apple Developer Program</span>
+            <span class="funds-desc">The $99/year fee that keeps Klok notarized by Apple, so Gatekeeper doesn't flag it on a fresh Mac.</span>
+          </li>
+          <li class="funds-row">
+            <span class="funds-num" aria-hidden="true">02</span>
+            <span class="funds-title">Development time</span>
+            <span class="funds-desc">Every item on the roadmap competes with a day job. Support buys back hours to actually ship it.</span>
+          </li>
+          <li class="funds-row">
+            <span class="funds-num" aria-hidden="true">03</span>
+            <span class="funds-title">Staying independent</span>
+            <span class="funds-desc">No telemetry and no "free with limits" tier down the line. Support is what makes a one-time build sustainable instead of a subscription.</span>
+          </li>
+        </ol>
+      </section>
+
+      <!-- ============ The ask: the one card on this page ============ -->
+      <section class="support-section" id="support" aria-labelledby="support-heading">
+        <h2 class="h support-section-heading" id="support-heading">Chip in what you want</h2>
+        <div class="support-panel">
+          <p class="mono">Suggested, but any amount helps</p>
+          <div class="support-chip-row" aria-hidden="true">
+            <span class="support-chip">$5</span>
+            <span class="support-chip">$15</span>
+            <span class="support-chip">$30</span>
+            <span class="support-chip">Other</span>
+          </div>
+          <!-- Hidden until a payment provider is chosen:
+          <a class="btn-primary" href="#" aria-disabled="true" title="TBD - payment provider not yet chosen">Continue to checkout <span class="placeholder-text">[TBD]</span></a>
+          -->
+          <p class="support-panel-note">Online checkout is coming soon. Want to chip in now? Write to <a href="mailto:a.gatashov@gmail.com?subject=Supporting%20Klok">a.gatashov@gmail.com</a>.</p>
+          <p class="small support-panel-caption">Donations are optional and don't unlock anything. Klok is fully functional for free either way.</p>
+        </div>
+      </section>
+
+      <!-- ============ Other ways to help: plain list, not feature cards ============ -->
+      <section class="support-section" aria-labelledby="other-heading">
+        <h2 class="h support-section-heading" id="other-heading">Didn't want to donate?</h2>
+        <ul class="support-plainlist">
+          <!-- Hidden until there's a review link:
+          <li><strong>Leave a review.</strong> If Klok's useful, a quick rating or shout-out helps far more than you'd think. <span class="placeholder-text">[TBD - review link]</span></li>
+          -->
+          <li><strong>Tell a friend who bills clients.</strong> Word of mouth from freelancers who actually get paid faster is the best marketing Klok has.</li>
+          <li><strong>Send feedback.</strong> Bug reports and feature requests shape the roadmap directly. Write to <a href="mailto:a.gatashov@gmail.com?subject=Klok%20feedback">a.gatashov@gmail.com</a>.</li>
+        </ul>
+      </section>
+
+    </div>
+  </main>
+
+  <!-- ============ Footer ============ -->
+  <footer class="footer">
+    <div class="container footer-top">
+      <div class="footer-brand">
+        <span class="footer-logo">
+          <img class="wordmark" src="assets/klok-brand/wordmark/klok-wordmark-compact.svg" width="69" height="24" alt="Klok" />
+        </span>
+        <span class="small footer-tagline">Local time tracking for Mac.</span>
+      </div>
+      <nav class="footer-links" aria-label="Footer">
+        <a href="index.html#how" class="btn-ghost">How it works</a>
+        <a href="donate.html" class="btn-ghost" aria-current="page">Support Klok</a>
+        <a href="mailto:a.gatashov@gmail.com?subject=Klok%20feedback" class="btn-ghost">Contact / feedback</a>
+      </nav>
+    </div>
+
+    <div class="container">
+      <p class="mono footer-copyright">&copy; 2026 Klok</p>
+    </div>
+  </footer>
+
+  <script src="js/script.js"></script>
+</body>
+</html>
