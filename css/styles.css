@@ -739,8 +739,21 @@ button:focus-visible,
   transition: background-color 0.25s;
 }
 
-.hero-chip-highlight {
+/* Statement state: the "sent to your Sheet" link sits on its own row
+   under the client name, split off by a hairline. Hidden while empty. */
+.hero-chip-link {
+  margin-top: 2px;
+  padding-top: 10px;
+  border-top: 1px solid rgba(255, 255, 255, 0.12);
+  font-size: 13px;
+  font-weight: 600;
+  line-height: 1.35;
   color: var(--color-mint);
+  transition: opacity 0.2s;
+}
+
+.hero-chip-link:empty {
+  display: none;
 }
 
 .hero-chip--who.is-statement {

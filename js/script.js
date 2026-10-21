@@ -270,7 +270,7 @@
       var label = showStatement ? "Statement" : "Now working on";
       var dotColor = showStatement ? DIAL_DATA[0].color : who.color;
       var nameText = showStatement ? DIAL_DATA[0].name.split(" · ")[0] : who.name;
-      var suffixText = showStatement ? " · sent to your Google Sheet →" : "";
+      var suffixText = showStatement ? "Sent to your Google Sheet →" : "";
       var key = label + "|" + nameText + "|" + suffixText;
 
       if (clientLabelEl && whoNameEl && whoDotEl && clientSuffixEl) {
@@ -279,6 +279,7 @@
           if (clientRowEl) {
             clientRowEl.style.opacity = "0";
           }
+          clientSuffixEl.style.opacity = "0";
           setTimeout(function () {
             clientLabelEl.textContent = label;
             whoDotEl.style.background = dotColor;
@@ -287,6 +288,7 @@
             if (clientRowEl) {
               clientRowEl.style.opacity = "1";
             }
+            clientSuffixEl.style.opacity = "1";
           }, 150);
         }
       }
