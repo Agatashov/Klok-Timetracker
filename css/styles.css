@@ -1,5 +1,5 @@
 /*
-  Klok — Marketing site styles (Option C — dark + colour blocks)
+  Ka-Chrono — Marketing site styles (Option C — dark + colour blocks)
 
   Rebuilt to match "Option C — dark + colour blocks" (a design-tool mockup
   at a fixed 1440px canvas) faithfully in a real, responsive, accessible
@@ -38,7 +38,7 @@
   --color-dial-admin: #5a5a5a;
 
   /* Brand kit "ghost" dot — the muted track colour behind each ring's
-     coloured dots (see assets/klok-brand/README.md). */
+     coloured dots (see assets/kachrono-brand/ (see kachrono-brand/README.md)). */
   --color-ghost: #333333;
 
   /* Typography */
@@ -329,7 +329,7 @@ button:focus-visible,
 }
 
 /* Shared "heading left, intro paragraph right" header row used by "The
-   app" and "Why Klok". */
+   app" and "Why Ka-Chrono". */
 .split-head {
   display: flex;
   flex-direction: column;
@@ -389,6 +389,11 @@ button:focus-visible,
 .wordmark {
   flex: none;
   display: block;
+}
+
+/* Keeps hyphenated brand words (Ka-Chrono, ka-ching) from breaking across lines in headings. */
+.nowrap {
+  white-space: nowrap;
 }
 
 .nav-logo {
@@ -1038,8 +1043,8 @@ button:focus-visible,
   flex: none;
 }
 
-/* ---------- Why Klok: transfer loop ----------
-   Adapted from a design-tool reference (temp files/Why Klok · V7b
+/* ---------- Why Ka-Chrono: transfer loop ----------
+   Adapted from a design-tool reference (temp files/Why Ka-Chrono · V7b
    Proportion, transfer loop-html.zip) — values and dot geometry
    replicated (the ring/track coordinates are the brand kit's own icon
    geometry, not invented here), markup and animation names rebuilt as

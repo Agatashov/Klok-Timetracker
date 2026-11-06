@@ -1,5 +1,5 @@
 /*
- * Klok marketing site — interactivity (Option C — dark + colour blocks)
+ * Ka-Chrono marketing site — interactivity (Option C — dark + colour blocks)
  *
  * The reference mockup drives every `{{clock}}` placeholder from one
  * shared, ever-increasing elapsed-time value (see its own
@@ -267,7 +267,7 @@
       // One chip, two states: "Now working on <client>" while the day
       // plays out, then it swaps in place to "Statement" once the day
       // completes, instead of a second card appearing elsewhere.
-      var label = showStatement ? "Statement" : "Now working on";
+      var label = showStatement ? "Invoice" : "Now working on";
       var dotColor = showStatement ? DIAL_DATA[0].color : who.color;
       var nameText = showStatement ? DIAL_DATA[0].name.split(" · ")[0] : who.name;
       var suffixText = showStatement ? "Sent to your Google Sheet →" : "";
